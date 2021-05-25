@@ -22,6 +22,7 @@ https://docs.google.com/document/d/1dTjjHdyoeeg2Mowm0JAl9EsL_Tx5iFQnXfJ07gILaE8/
 ## Development Log
 ### Monday, May 24, 2021
 Nora: did some stuff
+
 Christopher: did some stuff
 
 ## UML Diagrams
