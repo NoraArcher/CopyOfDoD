@@ -13,3 +13,12 @@ eyes on the clock... because in this game you **dig**, or you **die**.
 
 For more information visit our prototype at this link:
 https://docs.google.com/document/d/1dTjjHdyoeeg2Mowm0JAl9EsL_Tx5iFQnXfJ07gILaE8/edit?usp=sharing
+
+## Compilation and Execution
+```
+// the instructions will be here
+```
+
+## Development Log
+### Monday, May 24, 2021
+* stuff will be here
