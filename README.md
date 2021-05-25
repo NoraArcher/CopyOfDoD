@@ -1,4 +1,4 @@
-# APCSFinalProject
+# APCSFinalProject: Dig or Die!
 
 Christopher Liu and Nora Archer, otherwise known by our professional label
 Extreme Educators, present to you *Dig or Die*! An archeology themed game with
