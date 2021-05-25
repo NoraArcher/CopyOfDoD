@@ -22,7 +22,7 @@ https://docs.google.com/document/d/1dTjjHdyoeeg2Mowm0JAl9EsL_Tx5iFQnXfJ07gILaE8/
 ## Development Log
 | Date | Nora | Christopher |
 | ---- | ---- | ----------- |
-| Mon 5/24/21 | Nora's stuff goes here | Completed project prototype. |
+| Mon 5/24/21 | Made and worked on prototype | Completed project prototype. |
 
 ## UML Diagrams
 that goes here
