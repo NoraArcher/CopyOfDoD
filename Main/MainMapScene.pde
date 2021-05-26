@@ -1,7 +1,6 @@
 public class MainMapScene extends Scene{
   
-  //private Button DIG;
-  //private Button MAP;
+  //private Button DIG, MAP;
   
   MainMapScene(){
     super.mapX = width/2;

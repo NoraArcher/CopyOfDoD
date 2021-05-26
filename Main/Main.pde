@@ -44,9 +44,8 @@ void keyPressed(){
 
 void mousePressed(){
   if (!tasking){
-    //can click DIG button, which will make tasking true
+    //if dig.isActive() && mouse is clicking dig, tasking! = false and activeSet changes
   } else {
-    //works differently in all tasks, should be able to
-    //draw objects across screen generally
+    activeSet.gameplay();
   }
 }
