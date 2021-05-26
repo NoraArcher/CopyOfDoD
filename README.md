@@ -23,7 +23,6 @@ https://docs.google.com/document/d/1dTjjHdyoeeg2Mowm0JAl9EsL_Tx5iFQnXfJ07gILaE8/
 | Date | Nora | Christopher |
 | ---- | ---- | ----------- |
 | Mon 5/24/21 | Made and worked on prototype | Completed project prototype. |
-| ---- | ---- | ----------- |
 | Tue 5/25/21 | Created Scene abstract class and integrated it into Main methods | --- |
 
 ## UML Diagrams
