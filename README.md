@@ -23,7 +23,8 @@ https://docs.google.com/document/d/1dTjjHdyoeeg2Mowm0JAl9EsL_Tx5iFQnXfJ07gILaE8/
 | Date | Nora | Christopher |
 | ---- | ---- | ----------- |
 | Mon 5/24/21 | Made and worked on prototype | Completed project prototype. |
-| Tue 5/25/21 | Created Scene, DraggableObject, and Button abstract classes (minimal content) | --- |
+| Tue 5/25/21 | Created Scene, DraggableObject, and Button abstract classes (minimal content) |  |
+| Wed 5/26/21 | Created DigButton and MapButton, changed display of MainMapScene |  |
 
 ## UML Diagrams
 that goes here
