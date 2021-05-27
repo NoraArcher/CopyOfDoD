@@ -1,10 +1,24 @@
 public abstract class Scene {
   
-  private int mapX, mapY;
+  private float mapX, mapY;
   private boolean isFinished;
   
   abstract void display();//to be called in draw
   
-  abstract void gameplay();//to be called in mousePressed?
+  abstract void keyHandler(int code);
+  
+  abstract void mouseHandler(int x, int y);
+  
+  float getMapX(){
+    return mapX;
+  }
+  
+  float getMapY(){
+    return mapY;
+  }
+  
+  boolean isFinished(){
+    return isFinished;
+  }
   
 }
