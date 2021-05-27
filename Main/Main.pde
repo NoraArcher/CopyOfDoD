@@ -63,7 +63,6 @@ float getRemainingTime() {
 }
 
 String formattedTime(int minutes, int seconds) {
-  println(seconds);
   String out = "";
   if (minutes < 10) out += "0";
   out += minutes + ":";
