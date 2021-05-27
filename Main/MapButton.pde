@@ -1,4 +1,4 @@
-public class MapButton extends Button{
+public class MapButton {
   
   int x, y;
   boolean active;

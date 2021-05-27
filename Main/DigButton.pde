@@ -1,4 +1,4 @@
-public class DigButton extends Button{
+public class DigButton {
   
   int x, y;
   boolean active;//active here means able to be clicked
