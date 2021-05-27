@@ -1,4 +1,8 @@
-float time;
+// TIME
+float startTime;
+final float ALLOTTED_TIME = 300000; // 5 mins
+
+
 boolean tasking;
 ArrayList<Scene> scenes;
 Scene activeSet;
@@ -8,7 +12,6 @@ MapButton MAP;
 
 void setup(){
   size(1000, 800);
-  time = 0.0;
   tasking = false;
   pc = new Player(75+90, 125+70);
   scenes = new ArrayList<Scene>();
@@ -20,7 +23,7 @@ void setup(){
 
 void draw(){
   activeSet.display();
-  clock();
+  showClock();
   if (!tasking) {
     pc.display();
     if (!(DIG.isActive())) {
@@ -33,7 +36,7 @@ void draw(){
   if (activeSet.isFinished()) tasking = false;
 }
 
-void clock(){
+void showClock(){
   stroke(0);
   strokeWeight(2);
   fill(250);
@@ -41,13 +44,26 @@ void clock(){
   noStroke();
   fill(250, 0, 0);
   textSize(30);
-  int hour = (int)((360-time)/60);
-  int minute = (int)((360-time)%60);
-  String a = ""+hour;  String b =""+minute;
-  if(hour<10) a="0"+a;
-  if(minute<10) b="0"+b;
-  text(a+":"+b, width-125, 65);
-  time += 0.005;
+  
+  float remainingTime = getRemainingTime();
+  int minutes = (int) remainingTime / 60000;
+  int seconds = (int) (remainingTime - (minutes * 60000)) / 1000;
+
+  text(formattedTime(minutes, seconds), width-125, 65);
+}
+
+float getRemainingTime() {
+   return ALLOTTED_TIME - (millis() - startTime);
+}
+
+String formattedTime(int minutes, int seconds) {
+  println(seconds);
+  String out = "";
+  if (minutes < 10) out += "0";
+  out += minutes + ":";
+  if (seconds < 10) out += "0";
+  out += seconds;
+  return out;
 }
 
 void keyPressed(){
