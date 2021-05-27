@@ -27,4 +27,4 @@ https://docs.google.com/document/d/1dTjjHdyoeeg2Mowm0JAl9EsL_Tx5iFQnXfJ07gILaE8/
 | Wed 5/26/21 | Created DigButton and MapButton, changed display of MainMapScene |  |
 
 ## UML Diagrams
-that goes here
+![UML Diagram](/img/APCS%20Final%20Project.png)
