@@ -12,6 +12,8 @@ public class Player{
   
   void display(){
     fill(c);
+    stroke(190, 133, 133);
+    strokeWeight(3);
     ellipse(x, y, r, (r*3/2));
     //draw visor
     rectMode(CENTER);
@@ -32,7 +34,7 @@ public class Player{
         x-=20;
       }
     } else if (code == 83 || code == 40){//S
-      if (y < (height-100-r)) {
+      if (y < (height-125-r)) {
         y+=20;
       }
     } else if (code == 68 || code == 39){//D
@@ -41,5 +43,13 @@ public class Player{
       }
     }
   }//end of move
+  
+  float getX(){
+    return x;
+  }
+  
+  float getY(){
+    return y;
+  }
  
 }//end of class
