@@ -9,4 +9,8 @@ public abstract class Button {
     return active;
   }
   
+  void setActive(boolean a){
+    active = a;
+  }
+  
 }
