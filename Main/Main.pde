@@ -2,13 +2,17 @@
 float startTime;
 final float ALLOTTED_TIME = 300000; // 5 mins
 
-
-boolean tasking;
+// SCENE HANDLING
 ArrayList<Scene> scenes;
 Scene activeSet;
-Player pc;
+boolean tasking;
+
+// BUTTONS
 DigButton DIG;
 MapButton MAP;
+
+// PLAYER
+Player pc;
 
 void setup(){
   size(1000, 800);
@@ -35,6 +39,8 @@ void draw(){
   }
   if (activeSet.isFinished()) tasking = false;
 }
+
+// TIME
 
 void showClock(){
   stroke(0);
@@ -65,6 +71,10 @@ String formattedTime(int minutes, int seconds) {
   out += seconds;
   return out;
 }
+
+
+
+
 
 void keyPressed(){
   if (!tasking){
