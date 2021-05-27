@@ -72,10 +72,6 @@ String formattedTime(int minutes, int seconds) {
   return out;
 }
 
-
-
-
-
 void keyPressed(){
   if (!tasking){
     pc.move(keyCode);
@@ -95,6 +91,6 @@ void mousePressed(){
       MAP.clicked();
     }
   } else {
-    activeSet.gameplay();
+    activeSet.mouseHandler(mouseX, mouseY);
   }
 }

@@ -6,6 +6,7 @@ public class MainMapScene extends Scene{
     super.mapX = 0;
     super.mapY = 0;
     super.isFinished = false;
+
     palette = new color[5];
     palette[4] = color(168, 101, 30);//dark brown
     palette[3] = color(239, 222, 194);//pale sand
@@ -48,8 +49,12 @@ public class MainMapScene extends Scene{
     line(75+45, 125+64, 75+130, 125+64);
   }
   
-  void gameplay(){//should never be called
-    System.out.print("Hello World");
+  void keyHandler(int code) {
+    
+  }
+  
+  void mouseHandler(int x, int y) {
+    
   }
   
 }
