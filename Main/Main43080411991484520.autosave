@@ -20,39 +20,28 @@ void setup(){
   pc = new Player(75+90, 125+70);
   scenes = new ArrayList<Scene>();
   scenes.add(new MainMapScene());
-  scenes.add(new AssembleArtifactScene());
-  //all tasks added here
-  //scenes.add(new DefeatScene());
-  //scenes.add(new VictoryScene());
   activeSet = scenes.get(0);
   DIG = new DigButton((width/2)+60, height-60);
-  MAP = new MapButton((width/2)-80, height-60);
+  MAP = new MapButton((width/2)-75, height-60);
 }
 
 void draw(){
   activeSet.display();
   if (getRemainingTime() <= 0) {
-    //activeSet = DefeatScene; //DefeatScene's finished value is always false
-  } else if (allFinished()) {
-    //activeSet = VictoryScene; //^ same with VictoryScene
-  }else {
+    //activeSet = buryScene.//losing scene isFinished stays false
+  } else  {
     showClock();
   }
   if (!tasking) {
     pc.display();
-    if (DIG.clicked(scenes, pc) > 0) {//>0 b/c returning 0 would mean the task is main map
-      DIG.setActive(true);
-    } else {//does slow down draw by calling DIG.clicked so often
-      DIG.setActive(false);
-    }
+    if (!(DIG.isActive())) {
+      //print("DIG is inactive.");
+      if (DIG.clicked(scenes, pc) >= 0) DIG.setActive(true);
+    }//this does slow down draw
     DIG.display();
-    //MAP.display();
-    MAP.display(scenes);
+    MAP.display();
   }
-  if (activeSet.isFinished()) {
-    tasking = false;
-    activeSet = scenes.get(0);
-  }
+  if (activeSet.isFinished()) activeSet = scenes.get(0);
 }
 
 // TIME
@@ -78,6 +67,7 @@ float getRemainingTime() {
 }
 
 String formattedTime(int minutes, int seconds) {
+  println(seconds);
   String out = "";
   if (minutes < 10) out += "0";
   out += minutes + ":";
@@ -86,20 +76,16 @@ String formattedTime(int minutes, int seconds) {
   return out;
 }
 
-//GAMEPLAY
-
 void keyPressed(){
   if (!tasking){
     pc.move(keyCode);
-  } else {
-    activeSet.keyHandler(keyCode);
   }
 }
 
 void mousePressed(){
   if (!tasking){
     //button work
-    if (dist(DIG.getX(),DIG.getY(),mouseX,mouseY)<60 && DIG.isActive()){
+    if (dist(DIG.getX(),DIG.getY(),mouseX,mouseY)<60){
       int NewSet = DIG.clicked(scenes, pc);
       if (NewSet > 0) {
         activeSet = scenes.get(NewSet);
@@ -111,15 +97,4 @@ void mousePressed(){
   } else {
     activeSet.mouseHandler(mouseX, mouseY);
   }
-}
-
-//VICTORY
-
-boolean allFinished(){
-  for (int i = 0; i < scenes.size(); i++){
-    //change initial i to 1 when you're ready to add victory
-    //once Defeat and VictoryScenes are added make it scenes.size()-2
-    if (!scenes.get(i).isFinished()) return false;
-  }
-  return true;
 }
