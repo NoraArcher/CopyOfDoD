@@ -12,7 +12,7 @@ public class DigButton {
   void display(){
     int opacity = 200;
     stroke(169);
-    if (active){//how to passively turn active on is yet undone
+    if (active){
       opacity = 250;
       stroke(0);
     }
@@ -30,7 +30,7 @@ public class DigButton {
     int answer = -1;
     for (int i = 1; i < sets.size(); i++){
       c = sets.get(i);
-      if (dist(c.getMapX(),c.getMapY(),m.getX(),m.getY()) < 50){
+      if (!c.isFinished() && dist(c.getMapX(),c.getMapY(),m.getX(),m.getY()) < 50){
         answer = i;
       }
     }

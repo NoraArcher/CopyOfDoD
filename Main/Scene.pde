@@ -1,7 +1,8 @@
 public abstract class Scene {
   
   private float mapX, mapY;
-  private boolean isFinished;
+  private boolean finished;
+  //private int endCount;
   
   abstract void display();//to be called in draw
   
@@ -18,7 +19,7 @@ public abstract class Scene {
   }
   
   boolean isFinished(){
-    return isFinished;
+    return finished;
   }
   
 }

@@ -1,33 +1,48 @@
 public class AssembleArtifactScene extends Scene {
   
-  UrnShard[] shards;
-  UrnShard lastSelected;
+  private UrnShard[] shards;
+  private UrnShard lastSelected;
+  private PImage fullUrn;
+  private int endCount;
   //private float super.mapX, super.mapY; (from Scene)
-  //private boolean super.isFinished;
+  //private boolean super.finished;
   
   AssembleArtifactScene(){
     super.mapX = (width/2);
     super.mapY = 200;
-    super.isFinished = false;
+    super.finished = false;
     shards = new UrnShard[5];
     int destX = (width/2)-(384/2);  int destY = (height/2)-(512/2);
-    int lCol = (75+55); int rCol = width-(75+55);//these are vis values
-    shards[0] = new UrnShard(150, 100, rCol-150, 425-100, destX,destY,"shard0.png");
-    shards[1] = new UrnShard(245, 150, lCol-245, 595-150, destX,destY,"shard1.png");
-    shards[2] = new UrnShard( 96, 220, rCol- 96, 225-220, destX,destY,"shard2.png");
-    shards[3] = new UrnShard(255, 300, lCol-255, 395-300, destX,destY,"shard3.png");
-    shards[4] = new UrnShard(185, 405, lCol-185, 195-405, destX,destY,"shard4.png");
+    int lCol = (75+135); int rCol = width-(75+135);//these are vis values
+    shards[0] = new UrnShard(150, 100, rCol- 80, 380-100, destX,destY,"shard0.png");//shifted this to fit the screen better
+    shards[1] = new UrnShard(245, 150, rCol-245, 555-150, destX,destY,"shard1.png");
+    shards[2] = new UrnShard( 96, 220, rCol- 96, 205-220, destX,destY,"shard2.png");
+    shards[3] = new UrnShard(255, 300, lCol-255, 300-300, destX,destY,"shard3.png");
+    shards[4] = new UrnShard(175, 405, lCol-175, 500-405, destX,destY,"shard4.png");
     lastSelected = shards[0];
+    fullUrn = loadImage("urn.jpg");
+    endCount=0;
   }
   
   void display(){
     background(206, 172, 65);
     fill(0,137,137);//blue
     rect(75, 125, width-150, height-250, 10);
+    fill(208,93,71);//star fish color
+    rect((width/2)-192, 125, 384, 40);
+    rect((width/2)-192, height-165, 384, 40);
+    stroke(154,108,99,250);  strokeWeight(3);
+    line((width/2)-192, 125, (width/2)-192, height-165);
+    line((width/2)+192, 125, (width/2)+192, height-165);
     //text("Click F to flip a piece", 0, height);
     for (UrnShard s : shards){
       s.display();
       //s.settle();//to see if they're done?
+    }
+    if (endCount>0) {
+      image(fullUrn, (width/2)-(384/2), (height/2)-(512/2));
+      endCount++;
+      if (endCount > 100) super.finished = true;
     }
   }
   
@@ -47,9 +62,19 @@ public class AssembleArtifactScene extends Scene {
       }
       //^for loop content
     }//end of for loop
-    //when every element of shards is settled, and their flipped values 
-    //are the same, THEN super.isFinished = true;
+    if (allRight()) {
+      endCount+=1;
+    }
   }  
+  
+  boolean allRight(){//true when every element of shards is settled, 
+  //and their flipped values are the same
+    boolean consistentF = shards[0].isFlipped();
+    for (UrnShard s : shards){
+      if (!s.isSettled() || s.isFlipped()!=consistentF) return false;
+    }
+    return true;
+  }
   
 }
 
@@ -72,6 +97,7 @@ private class UrnShard extends DraggableObject {
   void display(){
     image(fragment, super.x, super.y);
     if (!super.settled){
+      stroke(154,108,99,200);  strokeWeight(4);
       fill(180,132,13);
       circle(visX, visY, 20);//temporary marker
     }

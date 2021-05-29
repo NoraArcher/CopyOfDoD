@@ -21,6 +21,9 @@ void setup(){
   scenes = new ArrayList<Scene>();
   scenes.add(new MainMapScene());
   scenes.add(new AssembleArtifactScene());
+  //all tasks added here
+  //scenes.add(new DefeatScene());
+  //scenes.add(new VictoryScene());
   activeSet = scenes.get(0);
   DIG = new DigButton((width/2)+60, height-60);
   MAP = new MapButton((width/2)-80, height-60);
@@ -29,8 +32,10 @@ void setup(){
 void draw(){
   activeSet.display();
   if (getRemainingTime() <= 0) {
-    //activeSet = lossscrene.
-  } else {
+    //activeSet = DefeatScene; //DefeatScene's finished value is always false
+  } else if (allFinished()) {
+    //activeSet = VictoryScene; //^ same with VictoryScene
+  }else {
     showClock();
   }
   if (!tasking) {
@@ -43,7 +48,10 @@ void draw(){
     DIG.display();
     MAP.display();
   }
-  if (activeSet.isFinished()) tasking = false;
+  if (activeSet.isFinished()) {
+    tasking = false;
+    activeSet = scenes.get(0);
+  }
 }
 
 // TIME
@@ -77,6 +85,8 @@ String formattedTime(int minutes, int seconds) {
   return out;
 }
 
+//GAMEPLAY
+
 void keyPressed(){
   if (!tasking){
     pc.move(keyCode);
@@ -101,4 +111,14 @@ void mousePressed(){
   } else {
     activeSet.mouseHandler(mouseX, mouseY);
   }
+}
+
+//VICTORY
+
+boolean allFinished(){
+  for (int i = 1; i < scenes.size(); i++){
+    //once Defeat and VictoryScenes are added make it scenes.size()-2
+    if (!scenes.get(i).isFinished()) return false;
+  }
+  return true;
 }
