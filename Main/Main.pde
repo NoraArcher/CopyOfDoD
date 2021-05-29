@@ -20,24 +20,26 @@ void setup(){
   pc = new Player(75+90, 125+70);
   scenes = new ArrayList<Scene>();
   scenes.add(new MainMapScene());
+  scenes.add(new AssembleArtifactScene());
   activeSet = scenes.get(0);
   DIG = new DigButton((width/2)+60, height-60);
-  MAP = new MapButton((width/2)-75, height-60);
+  MAP = new MapButton((width/2)-80, height-60);
 }
 
 void draw(){
   activeSet.display();
-  if (getRemainingtime() <= 0) {
+  if (getRemainingTime() <= 0) {
     //activeSet = lossscrene.
-  } else  {
+  } else {
     showClock();
   }
   if (!tasking) {
     pc.display();
-    if (!(DIG.isActive())) {
-      //print("DIG is inactive.");
-      if (DIG.clicked(scenes, pc) >= 0) DIG.setActive(true);
-    }//this does slow down draw significantly
+    if (DIG.clicked(scenes, pc) > 0) {//>0 b/c returning 0 would mean the task is main map
+      DIG.setActive(true);
+    } else {
+      DIG.setActive(false);
+    }//does slow down draw by called DIG.clicked so often
     DIG.display();
     MAP.display();
   }
@@ -78,13 +80,15 @@ String formattedTime(int minutes, int seconds) {
 void keyPressed(){
   if (!tasking){
     pc.move(keyCode);
+  } else {
+    activeSet.keyHandler(keyCode);
   }
 }
 
 void mousePressed(){
   if (!tasking){
     //button work
-    if (dist(DIG.getX(),DIG.getY(),mouseX,mouseY)<60){
+    if (dist(DIG.getX(),DIG.getY(),mouseX,mouseY)<60 && DIG.isActive()){
       int NewSet = DIG.clicked(scenes, pc);
       if (NewSet > 0) {
         activeSet = scenes.get(NewSet);

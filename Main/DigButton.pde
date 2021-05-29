@@ -30,7 +30,7 @@ public class DigButton {
     int answer = -1;
     for (int i = 1; i < sets.size(); i++){
       c = sets.get(i);
-      if (dist(c.getMapX(),c.getMapY(),m.getX(),m.getY()) < 10){
+      if (dist(c.getMapX(),c.getMapY(),m.getX(),m.getY()) < 50){
         answer = i;
       }
     }
