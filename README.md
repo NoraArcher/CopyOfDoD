@@ -28,4 +28,4 @@ https://docs.google.com/document/d/1dTjjHdyoeeg2Mowm0JAl9EsL_Tx5iFQnXfJ07gILaE8/
 | Sat 5/29/21 | Minimum functioning ArtifactAssembleScene completed, made Buttons more reactive, and updated UML |  |
 
 ## UML Diagrams
-![UML Diagram](/img/APCS%20Final%20Project%20(1).png)
+![UML Diagram](/img/APCS%20Final%20Project.png)
