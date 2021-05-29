@@ -37,9 +37,9 @@ void draw(){
     pc.display();
     if (DIG.clicked(scenes, pc) > 0) {//>0 b/c returning 0 would mean the task is main map
       DIG.setActive(true);
-    } else {
+    } else {//does slow down draw by calling DIG.clicked so often
       DIG.setActive(false);
-    }//does slow down draw by called DIG.clicked so often
+    }
     DIG.display();
     MAP.display();
   }
@@ -93,6 +93,7 @@ void mousePressed(){
       if (NewSet > 0) {
         activeSet = scenes.get(NewSet);
         tasking = true;
+        //DIG is still displaying active during tasks >:|
       }
     } else if (dist(MAP.getX(),MAP.getY(),mouseX,mouseY)<75){
       MAP.clicked();
