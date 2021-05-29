@@ -22,7 +22,7 @@ public class AssembleArtifactScene extends Scene {
     shards[3] = new UrnShard(255, 300, lCol-255, 300-300, destX,destY,"shard3.png");
     shards[4] = new UrnShard(175, 405, lCol-175, 500-405, destX,destY,"shard4.png");
     lastSelected = shards[0];
-    fullUrn = loadImage("urn.jpg");
+    fullUrn = loadImage("shardsAll.jpg");
     endCount=0;
   }
   

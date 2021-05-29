@@ -117,7 +117,8 @@ void mousePressed(){
 //VICTORY
 
 boolean allFinished(){
-  for (int i = 1; i < scenes.size(); i++){
+  for (int i = 0; i < scenes.size(); i++){
+    //change initial i to 1 when you're ready to add victory
     //once Defeat and VictoryScenes are added make it scenes.size()-2
     if (!scenes.get(i).isFinished()) return false;
   }
