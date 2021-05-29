@@ -27,7 +27,11 @@ void setup(){
 
 void draw(){
   activeSet.display();
-  showClock();
+  if (getRemainingtime() <= 0) {
+    //activeSet = lossscrene.
+  } else  {
+    showClock();
+  }
   if (!tasking) {
     pc.display();
     if (!(DIG.isActive())) {
