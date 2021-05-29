@@ -6,11 +6,13 @@ public class AssembleArtifactScene extends Scene {
   private int endCount;
   //private float super.mapX, super.mapY; (from Scene)
   //private boolean super.finished;
+  //private String name;
   
   AssembleArtifactScene(){
-    super.mapX = (width/2);
-    super.mapY = 200;
+    super.mapX = 600;
+    super.mapY = 165;
     super.finished = false;
+    super.name = "Assemble Artifact";
     shards = new UrnShard[5];
     int destX = (width/2)-(384/2);  int destY = (height/2)-(512/2);
     int lCol = (75+135); int rCol = width-(75+135);//these are vis values
@@ -26,8 +28,10 @@ public class AssembleArtifactScene extends Scene {
   
   void display(){
     background(206, 172, 65);
-    fill(0,137,137);//blue
+    stroke(84,105,120); strokeWeight(8);//dark blue
+    fill(0,137,137);//medium blue
     rect(75, 125, width-150, height-250, 10);
+    noStroke();
     fill(208,93,71);//star fish color
     rect((width/2)-192, 125, 384, 40);
     rect((width/2)-192, height-165, 384, 40);
@@ -65,7 +69,7 @@ public class AssembleArtifactScene extends Scene {
     if (allRight()) {
       endCount+=1;
     }
-  }  
+  }
   
   boolean allRight(){//true when every element of shards is settled, 
   //and their flipped values are the same

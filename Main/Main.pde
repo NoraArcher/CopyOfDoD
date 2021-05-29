@@ -46,7 +46,8 @@ void draw(){
       DIG.setActive(false);
     }
     DIG.display();
-    MAP.display();
+    //MAP.display();
+    MAP.display(scenes);
   }
   if (activeSet.isFinished()) {
     tasking = false;
