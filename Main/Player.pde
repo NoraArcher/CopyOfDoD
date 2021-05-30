@@ -1,20 +1,19 @@
 public class Player{
   
   float x, y, r;
-  color c;
   color[] hues;
-  int hatIndex;
+  int hatIndex, hueIndex;
   ArrayList<Hat> toppings;
   
   Player(float a, float b){
     x = a;
     y = b;
     r = 50.0;
-    c = color(188, 143, 143);//purple
     hues = new color[3];
-    hues[0] = c;
+    hues[0] = color(188, 143, 143);//purple/red
     hues[1] = color(143, 188, 139);//green
     hues[2] = color(137, 162, 194);//blue
+    hueIndex = 0;
     hatIndex = -1;
     toppings = new ArrayList<Hat>();
     toppings.add(new CatEarsHat(r));
@@ -24,7 +23,7 @@ public class Player{
   
   void display(){
     if (hatIndex==0) toppings.get(hatIndex).display((int)x,(int)y);
-    fill(c);
+    fill(hues[hueIndex]);
     stroke(142,86,30);  strokeWeight(2);//outline color
     ellipse(x, y, r, (r*3/2.0));//torso
     stroke(218, 194, 124);  strokeWeight(4);//floor color
@@ -71,6 +70,7 @@ public class Player{
     return y;
   }
   
+  ///styling methods
   String[] getHats(){
     String[] answer = new String[toppings.size()];
     for (int i = 0; i < answer.length; i++){
@@ -78,18 +78,17 @@ public class Player{
     }
     return answer;
   }
+  color[] getHues(){
+    return hues;
+  }
   
   void setHat(int i){
     hatIndex = i;
   }
-  
   void setColor(int i){
-    c = hues[i];
+    hueIndex = i;
   }
   
-  int getOptionCount(){
-    return (toppings.size()+hues.length);
-  }
  
 }//end of class
 

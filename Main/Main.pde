@@ -111,12 +111,12 @@ void mousePressed(){//essentially button handler
     } else if (dist(MAP.getX(),MAP.getY(),mouseX,mouseY)<75){
       MAP.clicked();
     } else if (dist(STYLE.getX(),STYLE.getY(),mouseX,mouseY)<55) {
-      int choice = STYLE.clicked(pc);
-      String[] tops = pc.getHats();
-      if (choice < tops.length && choice >= -1) {//-1 is no hat, 1+ are hats
-        pc.setHat(choice);
-      } else if (choice >= tops.length) {
-        pc.setColor(choice-tops.length);
+      int[] choices = STYLE.clicked(pc);
+      if (choices[0] >= -1) {//-1 is no hat, 1+ are hats
+        pc.setHat(choices[0]);
+      }
+      if (choices[1] >= 0) {
+        pc.setColor(choices[1]);
       }
     }
   } else {
@@ -141,19 +141,23 @@ boolean allFinished(){
 private class StyleButton extends Button {
   //int super.x, super.y;
   //boolean super.active, super.selected;
-  int indexus;
+  int indexusH, indexusC;
   
   StyleButton(int a, int b){
     super.x = a;
     super.y = b;
     super.active = false;
-    indexus = 0;//this is kind of a terrible system but works for now
+    indexusH = 0;//first hat
+    indexusC = 0;
   }
   
   void display(){
-    fill(163); strokeWeight(3); noStroke();
-    if (active) stroke(255, 255, 0);
-    rect(super.x,super.y,15,30);
+    fill(163); strokeWeight(2); stroke(50);
+    if (active) {
+      stroke(255, 255, 0);
+      strokeWeight(3);
+    }
+    rect(super.x,super.y,20,50);
   }
   
   void activate(Player sir){
@@ -165,15 +169,18 @@ private class StyleButton extends Button {
   
   void clicked(){}//implemented differently than in abstract outline
   
-  int clicked(Player sir){
+  int[] clicked(Player sir){
+    int[] answer = {-2, -1};
     if (active){
-      int temp = indexus;
-      indexus++;
-      if (indexus >= sir.getOptionCount()) indexus = -1;
-      System.out.println(temp);
-      return temp;
+      answer = new int[]{indexusH, indexusC};
+      indexusH++;
+      if (indexusH >= sir.getHats().length) {
+        indexusH = -1;
+        indexusC++;
+        if (indexusC >= sir.getHues().length) indexusC = 0;
+      }
     }
-    return -2;
+    return answer;
   }
   
 }//end of class
