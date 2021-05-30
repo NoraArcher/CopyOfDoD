@@ -34,7 +34,7 @@ public class DigButton extends Button{
     active = false;
     for (int i = 1; i < sets.size(); i++){//change to size()-2 when Defeat+Victry are added
       c = sets.get(i);
-      if (!c.isFinished() && dist(c.getMapX(),c.getMapY(),m.getX(),m.getY()) < 70){
+      if (!c.isFinished() && dist(c.getMapX(),c.getMapY(),m.getX(),m.getY()) < (m.getRadius()*7/5.0)){
         answer = i;
         active = true;
       }
