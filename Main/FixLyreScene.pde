@@ -1,5 +1,7 @@
+import java.util.*;
 public class FixLyreScene extends Scene {
   private PImage emptyLyre;
+  private LyreWire[] wires;
 
   // COLORS
   final color[] COLORS = {
@@ -12,6 +14,17 @@ public class FixLyreScene extends Scene {
   FixLyreScene() {
     super(200, 200, "Fix Lyre");
     emptyLyre = loadImage("emptyLyre.png");
+    wires = new LyreWire[4];
+
+    List<Integer> starts = Arrays.asList(new Integer[] {0, 1, 2, 3});
+    List<Integer> ends = Arrays.asList(new Integer[] {0, 1, 2, 3});
+    Collections.shuffle(starts);
+    Collections.shuffle(ends);
+
+    for (int i = 0; i < wires.length; i++) {
+      wires[i] = new LyreWire(starts.get(i), ends.get(i), COLORS[i]);
+    }
+
     println("Constructor");
   }
 
