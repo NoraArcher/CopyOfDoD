@@ -14,7 +14,7 @@ public abstract class DraggableObject{
     }
   }
   
-  boolean move(){//called in corresponding-Scene gameplay, called in mousePressed
+  boolean move(){//called in corresponding-Scene gameplay, called in draw()
     if (dist(x,y,mouseX,mouseY)<50){//to establish that you're clicking on this
       x = mouseX;
       y = mouseY;
