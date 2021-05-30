@@ -4,6 +4,15 @@ public abstract class DraggableObject{
   private boolean settled;
   
   abstract void display();
+
+  DraggableObject() {}; // in case it's not used
+  DraggableObject(int x, int y, int xFinal, int yFinal) {
+    this.x = x;
+    this.y = y;
+    this.xFinal = xFinal;
+    this.yFinal = yFinal;
+    settled = false;
+  }
   
   void settle(){
     if (dist(x,y,xFinal,yFinal)<30){
@@ -26,5 +35,11 @@ public abstract class DraggableObject{
   boolean isSettled(){
     return settled;
   }
-  
+
+  void setCoords(int x, int y, int xFinal, int yFinal) {
+    this.x = x;
+    this.y = y;
+    this.xFinal = xFinal;
+    this.yFinal = yFinal;
+  }
 }
