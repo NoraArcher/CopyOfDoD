@@ -32,6 +32,7 @@ void setupScenes() {
   // ALL SCENES ADDED HERE
   scenes.add(new MainMapScene());
   scenes.add(new AssembleArtifactScene());
+  //next task
   //scenes.add(new DefeatScene());
   //scenes.add(new VictoryScene());
 
@@ -140,13 +141,10 @@ void mousePressed() {
     // STYLE
     else if (dist(STYLE.getX(), STYLE.getY(), mouseX, mouseY) < 55) {
       int[] choices = STYLE.clicked(PC);
-      if (choices[0] >= -1) { // -1 is no hat, 1+ are hats
-        PC.setHat(choices[0]);
-      }
-      if (choices[1] >= 0) {
-        PC.setColor(choices[1]);
-      }
+      if (choices[0] >= -1) PC.setHat(choices[0]);// -1 is no hat, 1+ are hats
+      if (choices[1] >= 0) PC.setColor(choices[1]);
     }
+    
   }
 }
 
@@ -184,14 +182,13 @@ private class DigButton extends Button {
     text("DIG", getX()-52, getY()+20);
   }
   
-  int clicked(ArrayList<Scene> sets, Player m){
-    //print("dig away?");
+  int clicked(ArrayList<Scene> sets, Player p){
     Scene c;
     int answer = -1;
     setActive(false);
-    for (int i = 1; i < sets.size(); i++){//change to size()-2 when Defeat+Victry are added
+    for (int i = 1; i < sets.size(); i++){// Change to size()-2 when Defeat+Victory are added
       c = sets.get(i);
-      if (!c.isFinished() && dist(c.getMapX(),c.getMapY(),m.getX(),m.getY()) < (m.getRadius()*7/5.0)){
+      if (!c.isFinished() && dist(c.getMapX(),c.getMapY(),p.getX(),p.getY()) < (p.getRadius()*7/5.0)){
         answer = i;
         setActive(true);
       }
@@ -206,6 +203,7 @@ private class MapButton extends Button {
     super(a, b);
   }
   
+  // Displays Names of Tasks over their access points on MainMapScene
   void display(ArrayList<Scene> sets) {
     int opacity = 250;
     
@@ -213,7 +211,7 @@ private class MapButton extends Button {
       opacity = 200;
       //display tasks labels
       textSize(28);
-      for (int i = 1; i < sets.size(); i++) {//change to size()-2 when Defeat+Victry are added
+      for (int i = 1; i < sets.size(); i++) {// Change to size()-2 when Defeat+Victry are added
         Scene c = sets.get(i);
         fill(0);
         if (c.isFinished()) fill(34, 139, 34);
@@ -245,8 +243,8 @@ private class StyleButton extends Button {
   
   StyleButton(int a, int b) {
     super(a, b);
-    indexusH = 0; //first hat
-    indexusC = 0;
+    indexusH = 0; // first hat
+    indexusC = 0; // initial color
   }
   
   void display() {
@@ -264,7 +262,6 @@ private class StyleButton extends Button {
       setActive(true);
     }
   }
-  
   
   int[] clicked(Player sir) {
     int[] answer = {-2, -1};
