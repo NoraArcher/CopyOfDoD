@@ -52,6 +52,8 @@ public class AssembleArtifactScene extends Scene {
         rectMode(CORNERS);
         rect((width/2)-192, 145, (width/2)+192, height-165);
         rectMode(CORNER);
+        fill(208,93,71);//star fish color base
+        rect((width/2)-192, height-165, 384, 40);
         image(fullUrn, (width/2)-(384/2)+15, (height/2)-(512/2));
       }
       endCount++;
