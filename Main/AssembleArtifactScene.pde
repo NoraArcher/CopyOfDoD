@@ -40,7 +40,6 @@ public class AssembleArtifactScene extends Scene {
     line((width/2)+192, 125, (width/2)+192, height-165);
     for (UrnShard s : shards){
       s.display();
-      //s.settle();//to see if they're done?
     }
     if (endCount == 0){
       fill(84,105,120);//dark blue
