@@ -57,6 +57,7 @@ public class FixLyreScene extends Scene {
 }
 
 private class LyreWire extends DraggableObject {
+  private int xInitial, yInitial;
   private color c;
 
   // COORDINATES
@@ -68,6 +69,20 @@ private class LyreWire extends DraggableObject {
   LyreWire(int start, int end, color c) {
     setCoords(STARTX[start], STARTY[start], ENDX[end], ENDY[end]);
     this.c = c;
+    this.xInitial = getX();
+    this.yInitial = getY();
+  }
+
+  int getXInitial() {
+    return xInitial;
+  }
+
+  int getYInitial() {
+    return yInitial;
+  }
+
+  color getColor() {
+    return c;
   }
 
   void display() {
