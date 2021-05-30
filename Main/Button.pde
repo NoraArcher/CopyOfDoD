@@ -1,28 +1,39 @@
-public abstract class Button {
-  int x,y;
-  boolean active, selected;//active is clickable, selected is clicked
+public class Button {
+  private int x, y;
+  private boolean active, selected; // active is clickable, selected is clicked
+
+  Button(int x, int y) {
+    this.x = x;
+    this.y = y;
+    active = false;
+    selected = false;
+  }
   
-  abstract void display();
-  abstract void clicked();
-  
-  float getX(){
+  float getX() {
     return x;
   }
   
-  float getY(){
+  float getY() {
     return y;
   }
   
-  void setActive(boolean a){
+  void setActive(boolean a) {
     active = a;
   }
   
-  void setSelected(boolean a){
+  void setSelected(boolean a) {
     selected = a;
   }
-  
-  boolean isActive(){
-    return active;
+
+  void toggleSelected() {
+    selected = !selected;
   }
   
+  boolean isActive() {
+    return active;
+  }
+
+  boolean isSelected() {
+    return selected;
+  }
 }
