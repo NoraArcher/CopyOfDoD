@@ -13,37 +13,55 @@ MapButton MAP;
 StyleButton STYLE;
 
 // PLAYER
-Player pc;
+Player PC;
 
-void setup(){
+/** Sets up the game */
+void setup() {
   size(1000, 800);
   tasking = false;
-  pc = new Player(75+90, 125+70);
+  PC = new Player(75+90, 125+70);
+
+  setupScenes();
+  setupButtons();
+}
+
+/** Initializes all scenes */
+void setupScenes() {
   scenes = new ArrayList<Scene>();
+
+  // ALL SCENES ADDED HERE
   scenes.add(new MainMapScene());
   scenes.add(new AssembleArtifactScene());
-  //all tasks added here
+  //next task
   //scenes.add(new DefeatScene());
   //scenes.add(new VictoryScene());
+
   activeSet = scenes.get(0);
+}
+
+/** Initializes all buttons */
+void setupButtons() {
   DIG = new DigButton((width/2)+60, height-60);
   MAP = new MapButton((width/2)-80, height-60);
   STYLE = new StyleButton(110, 300);
 }
 
-void draw(){
+/** Loops continuously - displays clock, current scene, and buttons */
+void draw() {
   activeSet.display();
+
   if (allFinished()) {
-    //activeSet = VictoryScene; //^ same with VictoryScene
+    // activeSet = VictoryScene; // ^ same with VictoryScene
   } else if (getRemainingTime() < 0) {
-    //activeSet = DefeatScene; //DefeatScene's finished value is always false
+    // activeSet = DefeatScene; // DefeatScene's finished value is always false
   } else {
     showClock();
   }
+
   if (!tasking) {
-    pc.display();
-    if (DIG.clicked(scenes, pc) > 0) {};//this will check and change active all at once
-    STYLE.activate(pc);//(similar use to above)
+    PC.display();
+    if (DIG.clicked(scenes, PC) > 0) {};//this will check and change active all at once
+    STYLE.activate(PC);//(similar use to above)
     DIG.display();
     //MAP.display();
     MAP.display(scenes);
@@ -58,7 +76,8 @@ void draw(){
 
 // TIME
 
-void showClock(){
+/** Displays the clock with the remaining time */
+void showClock() {
   stroke(0);
   strokeWeight(2);
   fill(250);
@@ -74,12 +93,14 @@ void showClock(){
   text(formattedTime(minutes, seconds), width-125, 65);
 }
 
+/** Returns the remaining time in milliseconds */
 float getRemainingTime() {
   float a = ALLOTTED_TIME - (millis() - startTime);
   if (a > 0.0) return a;
    return 0.0;
 }
 
+/** Formats the remaining time into a string in form MM:SS */
 String formattedTime(int minutes, int seconds) {
   String out = "";
   if (minutes < 10) out += "0";
@@ -89,45 +110,48 @@ String formattedTime(int minutes, int seconds) {
   return out;
 }
 
-//GAMEPLAY
+// GAMEPLAY
 
-void keyPressed(){
-  if (!tasking){
-    pc.move(keyCode);
+/** Handles key presses - moves PC or calls keyHandler of activeSet */
+void keyPressed() {
+  if (!tasking) {
+    PC.move(keyCode);
   } else {
     activeSet.keyHandler(keyCode);
   }
 }
 
-void mousePressed(){//essentially button handler
-  if (!tasking){
-    //button work
-    if (dist(DIG.getX(),DIG.getY(),mouseX,mouseY)<60 && DIG.isActive()){
-      int NewSet = DIG.clicked(scenes, pc);
+/** Handles button presses in main map */
+void mousePressed() {
+  if (!tasking) {
+    // DIG
+    if (dist(DIG.getX(), DIG.getY(), mouseX, mouseY) < 60 && DIG.isActive()) {
+      int NewSet = DIG.clicked(scenes, PC);
       if (NewSet > 0) {
         activeSet = scenes.get(NewSet);
         tasking = true;
       }
-    } else if (dist(MAP.getX(),MAP.getY(),mouseX,mouseY)<75){
-      MAP.clicked();
-    } else if (dist(STYLE.getX(),STYLE.getY(),mouseX,mouseY)<55) {
-      int[] choices = STYLE.clicked(pc);
-      if (choices[0] >= -1) {//-1 is no hat, 1+ are hats
-        pc.setHat(choices[0]);
-      }
-      if (choices[1] >= 0) {
-        pc.setColor(choices[1]);
-      }
     }
-  } else {
-    //activeSet.mouseHandler(mouseX, mouseY);
+
+    // MAP
+    else if (dist(MAP.getX(), MAP.getY(), mouseX, mouseY) < 75) {
+      MAP.clicked();
+    }
+
+    // STYLE
+    else if (dist(STYLE.getX(), STYLE.getY(), mouseX, mouseY) < 55) {
+      int[] choices = STYLE.clicked(PC);
+      if (choices[0] >= -1) PC.setHat(choices[0]);// -1 is no hat, 1+ are hats
+      if (choices[1] >= 0) PC.setColor(choices[1]);
+    }
+    
   }
 }
 
-//VICTORY
+// VICTORY
 
-boolean allFinished(){
-  for (int i = 0; i < scenes.size(); i++){
+boolean allFinished() {
+  for (int i = 0; i < scenes.size(); i++) {
     //change initial i to 1 when you're ready to add victory
     //once Defeat and VictoryScenes are added make it scenes.size()-2
     if (!scenes.get(i).isFinished()) return false;
@@ -136,42 +160,112 @@ boolean allFinished(){
 }
 
 
-//BUTTONS
+// BUTTONS
 
-private class StyleButton extends Button {
-  //int super.x, super.y;
-  //boolean super.active, super.selected;
-  int indexusH, indexusC;
-  
-  StyleButton(int a, int b){
-    super.x = a;
-    super.y = b;
-    super.active = false;
-    indexusH = 0;//first hat
-    indexusC = 0;
+private class DigButton extends Button {
+  DigButton(int a, int b) {
+    super(a, b);
   }
   
-  void display(){
+  void display() {
+    int opacity = 200;
+    stroke(169);
+    if (isActive()){
+      opacity = 250;
+      stroke(0);
+    }
+    strokeWeight(5);
+    fill(178, 186, 187, opacity); // DarkGray
+    rect(getX()-60, getY()-40, 120, 80);
+    fill(211, 84, 0, opacity); // OrangeyBrown
+    textSize(60);
+    text("DIG", getX()-52, getY()+20);
+  }
+  
+  int clicked(ArrayList<Scene> sets, Player p){
+    Scene c;
+    int answer = -1;
+    setActive(false);
+    for (int i = 1; i < sets.size(); i++){// Change to size()-2 when Defeat+Victory are added
+      c = sets.get(i);
+      if (!c.isFinished() && dist(c.getMapX(),c.getMapY(),p.getX(),p.getY()) < (p.getRadius()*7/5.0)){
+        answer = i;
+        setActive(true);
+      }
+    }
+    return answer;
+  }
+  
+}
+
+private class MapButton extends Button {
+  MapButton(int a, int b) {
+    super(a, b);
+  }
+  
+  // Displays Names of Tasks over their access points on MainMapScene
+  void display(ArrayList<Scene> sets) {
+    int opacity = 250;
+    
+    if (isSelected()) {
+      opacity = 200;
+      //display tasks labels
+      textSize(28);
+      for (int i = 1; i < sets.size(); i++) {// Change to size()-2 when Defeat+Victry are added
+        Scene c = sets.get(i);
+        fill(0);
+        if (c.isFinished()) fill(34, 139, 34);
+        text(c.toString(), c.getMapX()-100, c.getMapY()+15);
+      }
+      //text("Swipe \nLicense", (width/4)+12, 160);
+      //text("Follow Story", (width/2)-90, 440);
+      //text("Clean Tablet", width-75-300, 380);
+      stroke(169);
+    } else {
+      stroke(0);
+    } 
+    strokeWeight(5);
+    fill(178, 186, 187, opacity);//DarkGray
+    rect(getX()-75, getY()-40, 150, 80);
+    fill(203, 67, 53, opacity);//Reddish
+    textSize(60);
+    text("MAP", getX()-63, getY()+20);
+  }
+  
+  void clicked() {
+    toggleSelected();
+  }
+  
+}
+
+private class StyleButton extends Button {
+  int indexusH, indexusC;
+  
+  StyleButton(int a, int b) {
+    super(a, b);
+    indexusH = 0; // first hat
+    indexusC = 0; // initial color
+  }
+  
+  void display() {
     fill(163); strokeWeight(2); stroke(50);
-    if (active) {
+    if (isActive()) {
       stroke(255, 255, 0);
       strokeWeight(3);
     }
-    rect(super.x-10,super.y-25,20,50);
+    rect(getX()-10, getY()-25, 20, 50);
   }
   
-  void activate(Player sir){
-    active = false;
-    if ( dist(super.x,super.y,sir.getX(),sir.getY()) < (sir.getRadius()*6/5.0) ){
-      active = true;
+  void activate(Player sir) {
+    setActive(false);
+    if (dist(getX(), getY(), sir.getX(), sir.getY()) < (sir.getRadius()*6/5.0)) {
+      setActive(true);
     }
   }
   
-  void clicked(){}//implemented differently than in abstract outline
-  
-  int[] clicked(Player sir){
+  int[] clicked(Player sir) {
     int[] answer = {-2, -1};
-    if (active){
+    if (isActive()) {
       answer = new int[]{indexusH, indexusC};
       indexusH++;
       if (indexusH >= sir.getHats().length) {
@@ -183,4 +277,4 @@ private class StyleButton extends Button {
     return answer;
   }
   
-}//end of class
+}
