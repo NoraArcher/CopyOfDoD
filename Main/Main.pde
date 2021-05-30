@@ -28,7 +28,7 @@ void setup(){
   activeSet = scenes.get(0);
   DIG = new DigButton((width/2)+60, height-60);
   MAP = new MapButton((width/2)-80, height-60);
-  STYLE = new StyleButton(100, 275);
+  STYLE = new StyleButton(110, 300);
 }
 
 void draw(){
@@ -157,12 +157,12 @@ private class StyleButton extends Button {
       stroke(255, 255, 0);
       strokeWeight(3);
     }
-    rect(super.x,super.y,20,50);
+    rect(super.x-10,super.y-25,20,50);
   }
   
   void activate(Player sir){
     active = false;
-    if (dist(super.x,super.y,sir.getX(),sir.getY()) < 50){
+    if ( dist(super.x,super.y,sir.getX(),sir.getY()) < (sir.getRadius()*6/5.0) ){
       active = true;
     }
   }

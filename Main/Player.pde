@@ -65,9 +65,11 @@ public class Player{
   float getX(){
     return x;
   }
-  
   float getY(){
     return y;
+  }
+  float getRadius(){
+    return r;
   }
   
   ///styling methods
