@@ -16,6 +16,7 @@ public class Player{
     toppings.add(new CatEarsHat(r));
     toppings.add(new HardHat(r));
     toppings.add(new BowlerHat(r));
+    hatIndex = 1;
   }
   
   void display(){
@@ -66,6 +67,22 @@ public class Player{
   float getY(){
     return y;
   }
+  
+  String[] getHats(){
+    String[] answer = new String[toppings.size()];
+    for (int i = 0; i < answer.length; i++){
+      answer[i] = toppings.get(i).toString();
+    }
+    return answer;
+  }
+  
+  void setHat(int i){
+    hatIndex = i;
+  }
+  
+  void setColor(color hue){
+    c = hue;
+  }
  
 }//end of class
 
@@ -73,12 +90,16 @@ public class Player{
 private abstract class Hat{
   private float r;
   private color c;
+  private String name;
   abstract void display(int a, int b);
+  String toString(){
+    return name;
+  }
 }
 
 private class CatEarsHat extends Hat{
   CatEarsHat(float z){
-    super.r = z;  super.c = color(0,0,0);
+    super.r = z;  super.c = color(0,0,0);  super.name = "Cat Ears";
   }
   void display(int a, int b){
     fill(super.c);  stroke(100);  strokeWeight(2);
@@ -93,7 +114,7 @@ private class CatEarsHat extends Hat{
 
 private class HardHat extends Hat{
   HardHat(float z){
-    super.r = z;  super.c = color(255, 215, 0);
+    super.r = z;  super.c = color(255, 215, 0);  super.name = "Hard Hat";
   }
   void display(int a, int b){
     fill(super.c);  stroke(240, 230, 140);  strokeWeight(2);//fillgold,linekhaki
@@ -106,7 +127,7 @@ private class HardHat extends Hat{
 
 private class BowlerHat extends Hat{
   BowlerHat(float z){
-    super.r = z;  super.c = color(0);
+    super.r = z;  super.c = color(0);  super.name = "Bowler Hat";
   }
   void display(int a, int b){
     fill(super.c);  stroke(100);  strokeWeight(2);

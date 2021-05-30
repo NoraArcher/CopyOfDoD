@@ -38,7 +38,9 @@ public class AssembleArtifactScene extends Scene {
     stroke(154,108,99,250);  strokeWeight(3);
     line((width/2)-192, 125, (width/2)-192, height-165);
     line((width/2)+192, 125, (width/2)+192, height-165);
-    text("Click F to flip a piece", 300, height-125);
+    fill(84,105,120);//dark blue
+    textSize(30);
+    text("Click F to flip a piece", 350, height-75);
     for (UrnShard s : shards){
       s.display();
       //s.settle();//to see if they're done?

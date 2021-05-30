@@ -10,6 +10,10 @@ boolean tasking;
 // BUTTONS
 DigButton DIG;
 MapButton MAP;
+//hat buttons? names can be accessed thru Player.getHats()
+//then maybe a name is clicked and the index of that in the getHats array
+//is put into pc.setHat(x);
+//little color grid can be options to put into pc.setColor(hue);
 
 // PLAYER
 Player pc;
