@@ -31,11 +31,11 @@ void setup(){
 
 void draw(){
   activeSet.display();
-  if (getRemainingTime() <= 0) {
-    //activeSet = DefeatScene; //DefeatScene's finished value is always false
-  } else if (allFinished()) {
+  if (allFinished()) {
     //activeSet = VictoryScene; //^ same with VictoryScene
-  }else {
+  } else if (getRemainingTime() < 0) {
+    //activeSet = DefeatScene; //DefeatScene's finished value is always false
+  } else {
     showClock();
   }
   if (!tasking) {
@@ -74,7 +74,9 @@ void showClock(){
 }
 
 float getRemainingTime() {
-   return ALLOTTED_TIME - (millis() - startTime);
+  float a = ALLOTTED_TIME - (millis() - startTime);
+  if (a > 0.0) return a;
+   return 0.0;
 }
 
 String formattedTime(int minutes, int seconds) {

@@ -38,7 +38,7 @@ public class AssembleArtifactScene extends Scene {
     stroke(154,108,99,250);  strokeWeight(3);
     line((width/2)-192, 125, (width/2)-192, height-165);
     line((width/2)+192, 125, (width/2)+192, height-165);
-    //text("Click F to flip a piece", 0, height);
+    text("Click F to flip a piece", 300, height-125);
     for (UrnShard s : shards){
       s.display();
       //s.settle();//to see if they're done?
@@ -95,15 +95,22 @@ private class UrnShard extends DraggableObject {
     visX = x1+shiftX;   visY = y1+shiftY;
     super.xFinal = x2;  super.yFinal = y2;
     super.settled = false;
+    flipped = false;
     fragment = loadImage(png);
   }
   
   void display(){
-    image(fragment, super.x, super.y);
+    if (flipped) {
+      image(fragment, super.x-384, super.y);
+    } else {
+      image(fragment, super.x, super.y);
+    }
     if (!super.settled){
       stroke(154,108,99,200);  strokeWeight(4);
-      fill(180,132,13);
+      fill(180,132,13);//midbrown
       circle(visX, visY, 20);//temporary marker
+      //fill(208,93,71);//pinkish
+      //circle(super.x, super.y, 50);//temporary marker
     }
   }
   
@@ -120,7 +127,23 @@ private class UrnShard extends DraggableObject {
   }
   
   void flip(){
-    flipped = !flipped;//not completed...
+    PImage resultant = fragment.copy();
+    for (int i = 0; i < fragment.width; i++){
+      for (int j = 0; j < fragment.height; j++){
+        resultant.set(i, j, fragment.get(fragment.width-1-i, j));
+      }
+    }
+    if (flipped) {
+      super.x-=384;
+      super.xFinal-=384;
+    } else {
+      super.x+=384;
+      super.xFinal+=384;
+    }
+    shiftX*=-1;
+    visX = super.x+shiftX;
+    fragment = resultant;
+    flipped = !flipped;
   }
   
   boolean isFlipped(){
