@@ -1,5 +1,6 @@
 public class FixLyreScene extends Scene {
     FixLyreScene() {
+        super(200, 200, "Fix Lyre");
         println("Constructor");
     }
 

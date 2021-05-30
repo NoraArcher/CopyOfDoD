@@ -3,10 +3,7 @@ public class MainMapScene extends Scene{
   private color[] palette;
   
   MainMapScene(){
-    super.mapX = 0;
-    super.mapY = 0;
-    super.finished = false;
-    super.name = "Main Map";
+    super(0, 0, "Main Map");
 
     palette = new color[5];
     palette[4] = color(168, 101, 30);//dark brown

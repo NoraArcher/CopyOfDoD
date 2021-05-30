@@ -32,6 +32,7 @@ void setupScenes() {
   // ALL SCENES ADDED HERE
   scenes.add(new MainMapScene());
   scenes.add(new AssembleArtifactScene());
+  scenes.add(new FixLyreScene());
   //next task
   //scenes.add(new DefeatScene());
   //scenes.add(new VictoryScene());
