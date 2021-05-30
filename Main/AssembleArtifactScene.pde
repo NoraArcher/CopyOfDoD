@@ -122,12 +122,10 @@ private class UrnShard extends DraggableObject {
       stroke(154,108,99,200);  strokeWeight(4);
       fill(180,132,13);//midbrown
       circle(visX, visY, 20);//temporary marker
-      //fill(208,93,71);//pinkish
-      //circle(super.x, super.y, 50);//temporary marker
     }
   }
   
-  boolean move(){//called in corresponding-Scene gameplay, called in mousePressed
+  boolean move(){//called in corresponding-Scene gameplay
     if (dist(visX,visY,mouseX,mouseY)<50){
       //to establish that you're clicking on this piece
       visX = mouseX;
