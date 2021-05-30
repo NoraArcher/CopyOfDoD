@@ -13,6 +13,22 @@ public abstract class DraggableObject{
     this.yFinal = yFinal;
     settled = false;
   }
+
+  int getX() {
+    return x;
+  }
+
+  int getY() {
+    return y;
+  }
+
+  int getXFinal() {
+    return xFinal;
+  }
+
+  int getYFinal() {
+    return yFinal;
+  }
   
   void settle(){
     if (dist(x,y,xFinal,yFinal)<30){
