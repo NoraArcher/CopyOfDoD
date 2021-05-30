@@ -1,12 +1,12 @@
 public class MapButton extends Button {
   
   //int super.x, super.y;
-  //boolean super.active;//active here means to be clicked/pushed down
+  //boolean super.active, super.selected;
 
   MapButton(int a, int b){
     super.x = a;
     super.y = b;
-    super.active = false;
+    super.selected = false;
   }
   
   void display(){//implemented differently than in abstract outline
@@ -15,7 +15,7 @@ public class MapButton extends Button {
   void display(ArrayList<Scene> sets){
     int opacity = 250;
     
-    if (active) {
+    if (selected) {
       opacity = 200;
       //display tasks labels
       textSize(28);
@@ -41,7 +41,7 @@ public class MapButton extends Button {
   }
   
   void clicked(){
-    active = !active;
+    selected = !selected;
   }
   
 }

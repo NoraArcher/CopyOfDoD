@@ -1,7 +1,7 @@
 public class DigButton extends Button{
   
   //int super.x, super.y;
-  //boolean super.active;//active here means able to be clickable
+  //boolean super.active, super.selected;
 
   DigButton(int a, int b){
     super.x = a;
@@ -31,10 +31,12 @@ public class DigButton extends Button{
     //print("dig away?");
     Scene c;
     int answer = -1;
+    active = false;
     for (int i = 1; i < sets.size(); i++){//change to size()-2 when Defeat+Victry are added
       c = sets.get(i);
       if (!c.isFinished() && dist(c.getMapX(),c.getMapY(),m.getX(),m.getY()) < 70){
         answer = i;
+        active = true;
       }
     }
     return answer;

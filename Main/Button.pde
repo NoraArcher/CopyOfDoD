@@ -1,6 +1,6 @@
 public abstract class Button {
   int x,y;
-  boolean active;
+  boolean active, selected;//active is clickable, selected is clicked
   
   abstract void display();
   abstract void clicked();
@@ -15,6 +15,10 @@ public abstract class Button {
   
   void setActive(boolean a){
     active = a;
+  }
+  
+  void setSelected(boolean a){
+    selected = a;
   }
   
   boolean isActive(){

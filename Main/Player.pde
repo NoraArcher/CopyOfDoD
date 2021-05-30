@@ -1,22 +1,25 @@
 public class Player{
   
-  private float x, y, r;
-  private color c;
-  private int hatIndex;
-  private ArrayList<Hat> toppings;
-  
+  float x, y, r;
+  color c;
+  color[] hues;
+  int hatIndex;
+  ArrayList<Hat> toppings;
   
   Player(float a, float b){
     x = a;
     y = b;
     r = 50.0;
     c = color(188, 143, 143);//purple
+    hues = new color[3];
+    hues[0] = c;
+    hues[1] = color(143, 188, 139);//green
+    hues[2] = color(137, 162, 194);//blue
     hatIndex = -1;
     toppings = new ArrayList<Hat>();
     toppings.add(new CatEarsHat(r));
     toppings.add(new HardHat(r));
     toppings.add(new BowlerHat(r));
-    hatIndex = 1;
   }
   
   void display(){
@@ -80,8 +83,12 @@ public class Player{
     hatIndex = i;
   }
   
-  void setColor(color hue){
-    c = hue;
+  void setColor(int i){
+    c = hues[i];
+  }
+  
+  int getOptionCount(){
+    return (toppings.size()+hues.length);
   }
  
 }//end of class
