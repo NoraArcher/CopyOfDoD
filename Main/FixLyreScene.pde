@@ -2,10 +2,12 @@ public class FixLyreScene extends Scene {
   private PImage emptyLyre;
 
   // COLORS
-  final color CRED = color(255, 0, 0);
-  final color CBLUE = color(0, 0, 255);
-  final color CMAGENTA = color(255, 0, 255);
-  final color CYELLOW = color(255, 255, 0);
+  final color[] COLORS = {
+    color(255, 0, 0), // red
+    color(0, 0, 255), // blue
+    color(255, 0, 255), // magenta
+    color(255, 255, 0) // yellow
+  };
 
   FixLyreScene() {
     super(200, 200, "Fix Lyre");
