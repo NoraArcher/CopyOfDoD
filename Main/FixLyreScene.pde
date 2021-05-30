@@ -18,13 +18,18 @@ public class FixLyreScene extends Scene {
 
     // Background and border
     background(75, 175, 184); // darker cyan-ish
-    stroke(255, 215, 0); strokeWeight(8);
-    fill(160, 186, 147);
+    stroke(255, 215, 0); strokeWeight(8); // gold
+    fill(160, 186, 147); // pale green-ish
     rect(75, 125, width-150, height-250, 10);
     noStroke();
 
     // Empty lyre
     image(emptyLyre, width/2 - emptyLyre.width/2, height/2 - emptyLyre.height/2);
+
+    // Wires
+    for (LyreWire w : wires) {
+      w.display();
+    }
   }
 
   void keyHandler(int code) {
