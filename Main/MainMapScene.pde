@@ -54,7 +54,7 @@ public class MainMapScene extends Scene{
     
   }
   
-  void mouseHandler(int x, int y) {
+  void mouseHandler() {
     
   }
   

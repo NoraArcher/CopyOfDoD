@@ -9,7 +9,7 @@ public abstract class Scene {
   
   abstract void keyHandler(int code);
   
-  abstract void mouseHandler(int x, int y);
+  abstract void mouseHandler();
   
   float getMapX(){
     return mapX;

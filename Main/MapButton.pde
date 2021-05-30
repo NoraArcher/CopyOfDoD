@@ -1,18 +1,21 @@
-public class MapButton {
+public class MapButton extends Button {
   
-  int x, y;
-  boolean active;
+  //int super.x, super.y;
+  //boolean super.active, super.selected;
 
   MapButton(int a, int b){
-    x = a;
-    y = b;
-    active = false;//active here means selected
+    super.x = a;
+    super.y = b;
+    super.selected = false;
+  }
+  
+  void display(){//implemented differently than in abstract outline
   }
   
   void display(ArrayList<Scene> sets){
     int opacity = 250;
     
-    if (active) {
+    if (selected) {
       opacity = 200;
       //display tasks labels
       textSize(28);
@@ -38,19 +41,7 @@ public class MapButton {
   }
   
   void clicked(){
-    active = !active;
-  }
-  
-  float getX(){
-    return x;
-  }
-  
-  float getY(){
-    return y;
-  }
-  
-  void setActive(boolean a){
-    active = a;
+    selected = !selected;
   }
   
 }

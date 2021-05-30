@@ -10,6 +10,7 @@ boolean tasking;
 // BUTTONS
 DigButton DIG;
 MapButton MAP;
+StyleButton STYLE;
 
 // PLAYER
 Player pc;
@@ -27,6 +28,7 @@ void setup(){
   activeSet = scenes.get(0);
   DIG = new DigButton((width/2)+60, height-60);
   MAP = new MapButton((width/2)-80, height-60);
+  STYLE = new StyleButton(110, 300);
 }
 
 void draw(){
@@ -40,19 +42,18 @@ void draw(){
   }
   if (!tasking) {
     pc.display();
-    if (DIG.clicked(scenes, pc) > 0) {//>0 b/c returning 0 would mean the task is main map
-      DIG.setActive(true);
-    } else {//does slow down draw by calling DIG.clicked so often
-      DIG.setActive(false);
-    }
+    if (DIG.clicked(scenes, pc) > 0) {};//this will check and change active all at once
+    STYLE.activate(pc);//(similar use to above)
     DIG.display();
     //MAP.display();
     MAP.display(scenes);
+    STYLE.display();
   }
   if (activeSet.isFinished()) {
     tasking = false;
     activeSet = scenes.get(0);
   }
+  activeSet.mouseHandler();
 }
 
 // TIME
@@ -98,7 +99,7 @@ void keyPressed(){
   }
 }
 
-void mousePressed(){
+void mousePressed(){//essentially button handler
   if (!tasking){
     //button work
     if (dist(DIG.getX(),DIG.getY(),mouseX,mouseY)<60 && DIG.isActive()){
@@ -109,9 +110,17 @@ void mousePressed(){
       }
     } else if (dist(MAP.getX(),MAP.getY(),mouseX,mouseY)<75){
       MAP.clicked();
+    } else if (dist(STYLE.getX(),STYLE.getY(),mouseX,mouseY)<55) {
+      int[] choices = STYLE.clicked(pc);
+      if (choices[0] >= -1) {//-1 is no hat, 1+ are hats
+        pc.setHat(choices[0]);
+      }
+      if (choices[1] >= 0) {
+        pc.setColor(choices[1]);
+      }
     }
   } else {
-    activeSet.mouseHandler(mouseX, mouseY);
+    //activeSet.mouseHandler(mouseX, mouseY);
   }
 }
 
@@ -125,3 +134,53 @@ boolean allFinished(){
   }
   return true;
 }
+
+
+//BUTTONS
+
+private class StyleButton extends Button {
+  //int super.x, super.y;
+  //boolean super.active, super.selected;
+  int indexusH, indexusC;
+  
+  StyleButton(int a, int b){
+    super.x = a;
+    super.y = b;
+    super.active = false;
+    indexusH = 0;//first hat
+    indexusC = 0;
+  }
+  
+  void display(){
+    fill(163); strokeWeight(2); stroke(50);
+    if (active) {
+      stroke(255, 255, 0);
+      strokeWeight(3);
+    }
+    rect(super.x-10,super.y-25,20,50);
+  }
+  
+  void activate(Player sir){
+    active = false;
+    if ( dist(super.x,super.y,sir.getX(),sir.getY()) < (sir.getRadius()*6/5.0) ){
+      active = true;
+    }
+  }
+  
+  void clicked(){}//implemented differently than in abstract outline
+  
+  int[] clicked(Player sir){
+    int[] answer = {-2, -1};
+    if (active){
+      answer = new int[]{indexusH, indexusC};
+      indexusH++;
+      if (indexusH >= sir.getHats().length) {
+        indexusH = -1;
+        indexusC++;
+        if (indexusC >= sir.getHues().length) indexusC = 0;
+      }
+    }
+    return answer;
+  }
+  
+}//end of class

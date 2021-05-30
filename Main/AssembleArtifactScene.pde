@@ -22,7 +22,7 @@ public class AssembleArtifactScene extends Scene {
     shards[3] = new UrnShard(255, 300, lCol-255, 300-300, destX,destY,"shard3.png");
     shards[4] = new UrnShard(175, 405, lCol-175, 500-405, destX,destY,"shard4.png");
     lastSelected = shards[0];
-    fullUrn = loadImage("shardsAll.jpg");
+    fullUrn = loadImage("shardsAll.png");
     endCount=0;
   }
   
@@ -38,15 +38,24 @@ public class AssembleArtifactScene extends Scene {
     stroke(154,108,99,250);  strokeWeight(3);
     line((width/2)-192, 125, (width/2)-192, height-165);
     line((width/2)+192, 125, (width/2)+192, height-165);
-    text("Click F to flip a piece", 300, height-125);
     for (UrnShard s : shards){
       s.display();
       //s.settle();//to see if they're done?
     }
-    if (endCount>0) {
-      image(fullUrn, (width/2)-(384/2), (height/2)-(512/2));
+    if (endCount == 0){
+      fill(84,105,120);//dark blue
+      textSize(30);
+      text("Click F to flip a piece", 350, height-75);
+    } else if (endCount > 0) {
+      if (endCount > 80){
+        fill(0,137,137);
+        rectMode(CORNERS);
+        rect((width/2)-192, 145, (width/2)+192, height-165);
+        rectMode(CORNER);
+        image(fullUrn, (width/2)-(384/2)+15, (height/2)-(512/2));
+      }
       endCount++;
-      if (endCount > 100) super.finished = true;
+      if (endCount > 170) super.finished = true;
     }
   }
   
@@ -56,7 +65,7 @@ public class AssembleArtifactScene extends Scene {
     }
   }
   
-  void mouseHandler(int x, int y){
+  void mouseHandler(){
     for (UrnShard s : shards){
       if (!s.isSettled()) {
         if (s.move()) {
@@ -66,18 +75,22 @@ public class AssembleArtifactScene extends Scene {
       }
       //^for loop content
     }//end of for loop
-    if (allRight()) {
-      endCount+=1;
+    if (endCount == 0 && allRight()) {
+      endCount=1;
     }
   }
   
   boolean allRight(){//true when every element of shards is settled, 
   //and their flipped values are the same
+    boolean allSettled = true;
+    boolean ans = true;
     boolean consistentF = shards[0].isFlipped();
     for (UrnShard s : shards){
-      if (!s.isSettled() || s.isFlipped()!=consistentF) return false;
+      if (!s.isSettled() || s.isFlipped()!=consistentF) ans=false;
+      if (!s.isSettled()) allSettled=false;
     }
-    return true;
+    if (!ans && allSettled){}//restart button?
+    return ans;
   }
   
 }
