@@ -138,6 +138,100 @@ boolean allFinished(){
 
 //BUTTONS
 
+private class DigButton extends Button{
+  
+  //int super.x, super.y;
+  //boolean super.active, super.selected;
+
+  DigButton(int a, int b){
+    super.x = a;
+    super.y = b;
+    super.active = false;
+  }
+  
+  void display(){
+    int opacity = 200;
+    stroke(169);
+    if (super.active){
+      opacity = 250;
+      stroke(0);
+    }
+    strokeWeight(5);
+    fill(178, 186, 187, opacity);//DarkGray
+    rect(x-60, y-40, 120, 80);
+    fill(211, 84, 0, opacity);//OrangeyBrown
+    textSize(60);
+    text("DIG", x-52, y+20);
+  }
+  
+  void clicked(){//implemented differently than in abstract outline
+  }
+  
+  int clicked(ArrayList<Scene> sets, Player m){
+    //print("dig away?");
+    Scene c;
+    int answer = -1;
+    active = false;
+    for (int i = 1; i < sets.size(); i++){//change to size()-2 when Defeat+Victry are added
+      c = sets.get(i);
+      if (!c.isFinished() && dist(c.getMapX(),c.getMapY(),m.getX(),m.getY()) < (m.getRadius()*7/5.0)){
+        answer = i;
+        active = true;
+      }
+    }
+    return answer;
+  }
+  
+}
+
+private class MapButton extends Button {
+  
+  //int super.x, super.y;
+  //boolean super.active, super.selected;
+
+  MapButton(int a, int b){
+    super.x = a;
+    super.y = b;
+    super.selected = false;
+  }
+  
+  void display(){//implemented differently than in abstract outline
+  }
+  
+  void display(ArrayList<Scene> sets){
+    int opacity = 250;
+    
+    if (selected) {
+      opacity = 200;
+      //display tasks labels
+      textSize(28);
+      for (int i = 1; i < sets.size(); i++){//change to size()-2 when Defeat+Victry are added
+        Scene c = sets.get(i);
+        fill(0);
+        if (c.isFinished()) fill(34, 139, 34);
+        text(c.toString(), c.getMapX()-100, c.getMapY()+15);
+      }
+      //text("Swipe \nLicense", (width/4)+12, 160);
+      //text("Follow Story", (width/2)-90, 440);
+      //text("Clean Tablet", width-75-300, 380);
+      stroke(169);
+    } else {
+      stroke(0);
+    } 
+    strokeWeight(5);
+    fill(178, 186, 187, opacity);//DarkGray
+    rect(x-75, y-40, 150, 80);
+    fill(203, 67, 53, opacity);//Reddish
+    textSize(60);
+    text("MAP", x-63, y+20);
+  }
+  
+  void clicked(){
+    selected = !selected;
+  }
+  
+}
+
 private class StyleButton extends Button {
   //int super.x, super.y;
   //boolean super.active, super.selected;
