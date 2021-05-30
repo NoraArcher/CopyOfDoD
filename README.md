@@ -26,7 +26,7 @@ https://docs.google.com/document/d/1dTjjHdyoeeg2Mowm0JAl9EsL_Tx5iFQnXfJ07gILaE8/
 | Tue 5/25/21 | Created Scene, DraggableObject, and Button abstract classes (minimal content) | Worked on UML |
 | Wed 5/26/21 | Created DigButton and MapButton, changed display of MainMapScene | Connected clock to system time, tried some early refactoring |
 | Sat 5/29/21 | Minimum functioning ArtifactAssembleScene completed, made Buttons more reactive, and updated UML |  |
-| Sun 5/30/21 | In flipping branch changed Player display and customizability, while refining the flipping in AAS |  |
+| Sun 5/30/21 | In flipping branch changed Player display and customizability, while refining the flipping in AAS | Refactored Main code, restructured Button class hierarchy |
 
 ## UML Diagrams
 ![UML Diagram](/img/APCS%20Final%20Project.png)
