@@ -22,7 +22,7 @@ public class AssembleArtifactScene extends Scene {
     shards[3] = new UrnShard(255, 300, lCol-255, 300-300, destX,destY,"shard3.png");
     shards[4] = new UrnShard(175, 405, lCol-175, 500-405, destX,destY,"shard4.png");
     lastSelected = shards[0];
-    fullUrn = loadImage("shardsAll.jpg");
+    fullUrn = loadImage("shardsAll.png");
     endCount=0;
   }
   
@@ -46,6 +46,10 @@ public class AssembleArtifactScene extends Scene {
       //s.settle();//to see if they're done?
     }
     if (endCount>0) {
+      fill(0,137,137);
+      rectMode(CORNERS);
+      rect((width/2)-192, 145, (width/2)+192, height-165);
+      rectMode(CORNER);
       image(fullUrn, (width/2)-(384/2), (height/2)-(512/2));
       endCount++;
       if (endCount > 100) super.finished = true;
@@ -58,7 +62,7 @@ public class AssembleArtifactScene extends Scene {
     }
   }
   
-  void mouseHandler(int x, int y){
+  void mouseHandler(){
     for (UrnShard s : shards){
       if (!s.isSettled()) {
         if (s.move()) {

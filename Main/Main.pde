@@ -10,6 +10,7 @@ boolean tasking;
 // BUTTONS
 DigButton DIG;
 MapButton MAP;
+//StyleButton STYLE;
 //hat buttons? names can be accessed thru Player.getHats()
 //then maybe a name is clicked and the index of that in the getHats array
 //is put into pc.setHat(x);
@@ -57,6 +58,7 @@ void draw(){
     tasking = false;
     activeSet = scenes.get(0);
   }
+  activeSet.mouseHandler();
 }
 
 // TIME
@@ -102,7 +104,7 @@ void keyPressed(){
   }
 }
 
-void mousePressed(){
+void mousePressed(){//essentially button handler
   if (!tasking){
     //button work
     if (dist(DIG.getX(),DIG.getY(),mouseX,mouseY)<60 && DIG.isActive()){
@@ -115,7 +117,7 @@ void mousePressed(){
       MAP.clicked();
     }
   } else {
-    activeSet.mouseHandler(mouseX, mouseY);
+    //activeSet.mouseHandler(mouseX, mouseY);
   }
 }
 
@@ -128,4 +130,19 @@ boolean allFinished(){
     if (!scenes.get(i).isFinished()) return false;
   }
   return true;
+}
+
+private class StyleButton extends Button {
+  //int super.x, super.y;
+  //boolean super.active;//active here means able to be clickable
+  
+  void display(){
+  }
+  
+  void clicked(){//implemented differently than in abstract outline
+  }
+  
+  int clicked(Player sir){
+    return 2;//options are 1-Cat Ears, 2-Hard Hat, 3-Bowler Hat, 4-Green, 5-Blue
+  }
 }
