@@ -8,9 +8,9 @@ Scene activeSet;
 boolean tasking;
 
 // BUTTONS
-final DigButton DIG;
-final MapButton MAP;
-final StyleButton STYLE;
+DigButton DIG;
+MapButton MAP;
+StyleButton STYLE;
 
 // PLAYER
 Player PC;
@@ -165,44 +165,35 @@ boolean allFinished() {
 // BUTTONS
 
 private class DigButton extends Button {
-  
-  //int super.x, super.y;
-  //boolean super.active, super.selected;
-
   DigButton(int a, int b) {
-    super.x = a;
-    super.y = b;
-    super.active = false;
+    super(a, b);
   }
   
   void display() {
     int opacity = 200;
     stroke(169);
-    if (super.active){
+    if (isActive()){
       opacity = 250;
       stroke(0);
     }
     strokeWeight(5);
     fill(178, 186, 187, opacity); // DarkGray
-    rect(x-60, y-40, 120, 80);
+    rect(getX()-60, getY()-40, 120, 80);
     fill(211, 84, 0, opacity); // OrangeyBrown
     textSize(60);
-    text("DIG", x-52, y+20);
-  }
-  
-  void clicked(){//implemented differently than in abstract outline
+    text("DIG", getX()-52, getY()+20);
   }
   
   int clicked(ArrayList<Scene> sets, Player m){
     //print("dig away?");
     Scene c;
     int answer = -1;
-    active = false;
+    setActive(false);
     for (int i = 1; i < sets.size(); i++){//change to size()-2 when Defeat+Victry are added
       c = sets.get(i);
       if (!c.isFinished() && dist(c.getMapX(),c.getMapY(),m.getX(),m.getY()) < (m.getRadius()*7/5.0)){
         answer = i;
-        active = true;
+        setActive(true);
       }
     }
     return answer;
@@ -211,23 +202,14 @@ private class DigButton extends Button {
 }
 
 private class MapButton extends Button {
-  
-  //int super.x, super.y;
-  //boolean super.active, super.selected;
-
   MapButton(int a, int b) {
-    super.x = a;
-    super.y = b;
-    super.selected = false;
-  }
-  
-  void display(){//implemented differently than in abstract outline
+    super(a, b);
   }
   
   void display(ArrayList<Scene> sets) {
     int opacity = 250;
     
-    if (selected) {
+    if (isSelected()) {
       opacity = 200;
       //display tasks labels
       textSize(28);
@@ -246,52 +228,47 @@ private class MapButton extends Button {
     } 
     strokeWeight(5);
     fill(178, 186, 187, opacity);//DarkGray
-    rect(x-75, y-40, 150, 80);
+    rect(getX()-75, getY()-40, 150, 80);
     fill(203, 67, 53, opacity);//Reddish
     textSize(60);
-    text("MAP", x-63, y+20);
+    text("MAP", getX()-63, getY()+20);
   }
   
-  void clicked(){
-    selected = !selected;
+  void clicked() {
+    toggleSelected();
   }
   
 }
 
 private class StyleButton extends Button {
-  //int super.x, super.y;
-  //boolean super.active, super.selected;
   int indexusH, indexusC;
   
-  StyleButton(int a, int b){
-    super.x = a;
-    super.y = b;
-    super.active = false;
-    indexusH = 0;//first hat
+  StyleButton(int a, int b) {
+    super(a, b);
+    indexusH = 0; //first hat
     indexusC = 0;
   }
   
-  void display(){
+  void display() {
     fill(163); strokeWeight(2); stroke(50);
-    if (active) {
+    if (isActive()) {
       stroke(255, 255, 0);
       strokeWeight(3);
     }
-    rect(super.x-10,super.y-25,20,50);
+    rect(getX()-10, getY()-25, 20, 50);
   }
   
-  void activate(Player sir){
-    active = false;
-    if ( dist(super.x,super.y,sir.getX(),sir.getY()) < (sir.getRadius()*6/5.0) ){
-      active = true;
+  void activate(Player sir) {
+    setActive(false);
+    if (dist(getX(), getY(), sir.getX(), sir.getY()) < (sir.getRadius()*6/5.0)) {
+      setActive(true);
     }
   }
   
-  void clicked(){}//implemented differently than in abstract outline
   
-  int[] clicked(Player sir){
+  int[] clicked(Player sir) {
     int[] answer = {-2, -1};
-    if (active){
+    if (isActive()) {
       answer = new int[]{indexusH, indexusC};
       indexusH++;
       if (indexusH >= sir.getHats().length) {
