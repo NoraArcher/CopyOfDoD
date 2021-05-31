@@ -15,9 +15,8 @@ For more information visit our prototype at this link:
 https://docs.google.com/document/d/1dTjjHdyoeeg2Mowm0JAl9EsL_Tx5iFQnXfJ07gILaE8/edit?usp=sharing
 
 ## Compilation and Execution
-```
-// the instructions will be here
-```
+1. Open `Main.pde` in [Processing](https://processing.org/download/).
+2. Press the "Run" button in the top-left corner.
 
 ## Development Log
 | Date | Nora | Christopher |
