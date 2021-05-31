@@ -41,9 +41,9 @@ void setupScenes() {
 
 /** Initializes all buttons */
 void setupButtons() {
-  DIG = new DigButton((width/2)+60, height-60);
-  MAP = new MapButton((width/2)-80, height-60);
-  STYLE = new StyleButton(110, 300);
+  DIG = new DigButton((width/2)+80, height-60);
+  MAP = new MapButton((width/2)-70, height-60);
+  STYLE = new StyleButton(91, 305);
 }
 
 /** Loops continuously - displays clock, current scene, and buttons */
@@ -59,13 +59,13 @@ void draw() {
   }
 
   if (!tasking) {
-    PC.display();
     if (DIG.clicked(scenes, PC) > 0) {};//this will check and change active all at once
     STYLE.activate(PC);//(similar use to above)
     DIG.display();
     //MAP.display();
     MAP.display(scenes);
     STYLE.display();
+    PC.display();
   }
   if (activeSet.isFinished()) {
     tasking = false;
@@ -253,7 +253,11 @@ private class StyleButton extends Button {
       stroke(255, 255, 0);
       strokeWeight(3);
     }
-    rect(getX()-10, getY()-25, 20, 50);
+    rect(getX()-10, getY()-25, 30, 50);
+    fill(218, 194, 124);  noStroke();
+    rectMode(CENTER);
+    rect(getX()+20, getY(), 35, 28, 10);
+    rectMode(CORNER);
   }
   
   void activate(Player sir) {
