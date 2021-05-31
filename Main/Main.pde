@@ -1,7 +1,7 @@
 // TIME
 float startTime;
-//final float ALLOTTED_TIME = 300000; // 5 mins
-final float ALLOTTED_TIME = 10000; // 5 mins
+final float ALLOTTED_TIME = 300000; // 5 mins
+//final float ALLOTTED_TIME = 10000; // 10 secs
 
 // SCENE HANDLING
 ArrayList<Scene> scenes;
@@ -36,7 +36,7 @@ void setupScenes() {
   scenes.add(new FixLyreScene());
   //next task
   scenes.add(new DefeatScene());
-  //scenes.add(new VictoryScene());
+  scenes.add(new VictoryScene());
 
   activeSet = scenes.get(0);
 }
@@ -52,10 +52,10 @@ void setupButtons() {
 void draw() {
   //activeSet.display();
   if (allFinished()) {
-    // activeSet = scenes.get(scenes.size()-1); //VictoryScene's finished always = false
-    // activeSet.display(PC);
+    activeSet = scenes.get(scenes.size()-1); //VictoryScene's finished always = false
+    activeSet.display(PC);
   } else if (getRemainingTime() <= 0) {
-    activeSet = scenes.get(3); //^ ditto, index is scenes.size()-2;
+    activeSet = scenes.get(scenes.size()-2); //^ ditto, index is scenes.size()-2;
     activeSet.display(PC);
   } else {
     activeSet.display();
@@ -158,7 +158,7 @@ void mouseReleased() {
 // VICTORY
 
 boolean allFinished() {
-  for (int i = 1; i < scenes.size()-1; i++) {
+  for (int i = 1; i < scenes.size()-2; i++) {
     //change initial i to 1 when you're ready to add victory
     //once Defeat and VictoryScenes are added make it scenes.size()-2
     if (!scenes.get(i).isFinished()) return false;
@@ -193,7 +193,7 @@ private class DigButton extends Button {
     Scene c;
     int answer = -1;
     setActive(false);
-    for (int i = 1; i < sets.size()-1; i++){// Change to size()-2 when Defeat+Victory are added
+    for (int i = 1; i < sets.size()-2; i++){// Change to size()-2 when Defeat+Victory are added
       c = sets.get(i);
       if (!c.isFinished() && dist(c.getMapX(),c.getMapY(),p.getX(),p.getY()) < (p.getRadius()*7/5.0)){
         answer = i;
@@ -218,7 +218,7 @@ private class MapButton extends Button {
       opacity = 200;
       //display tasks labels
       textSize(28);
-      for (int i = 1; i < sets.size()-1; i++) {// Change to size()-2 when Defeat+Victry are added
+      for (int i = 1; i < sets.size()-2; i++) {// Change to size()-2 when Defeat+Victry are added
         Scene c = sets.get(i);
         fill(0);
         if (c.isFinished()) fill(34, 139, 34);
