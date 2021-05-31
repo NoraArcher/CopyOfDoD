@@ -1,7 +1,7 @@
 // TIME
 float startTime;
-final float ALLOTTED_TIME = 300000; // 5 mins
-//final float ALLOTTED_TIME = 10000; // 5 mins
+//final float ALLOTTED_TIME = 300000; // 5 mins
+final float ALLOTTED_TIME = 10000; // 5 mins
 
 // SCENE HANDLING
 ArrayList<Scene> scenes;
@@ -118,9 +118,8 @@ String formattedTime(int minutes, int seconds) {
 void keyPressed() {
   if (!tasking) {
     PC.move(keyCode);
-  } else {
-    activeSet.keyHandler(keyCode);
   }
+  activeSet.keyHandler(keyCode);
 }
 
 /** Handles button presses in main map */
