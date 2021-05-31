@@ -62,9 +62,7 @@ public class FixLyreScene extends Scene {
 
   // HANDLERS
 
-  void keyHandler(int code) {
-    println("key handler lyre scene " + code);
-  }
+  void keyHandler(int code) {}
 
   void mouseHandler() {
     for (LyreWire w : wires) {
@@ -82,7 +80,6 @@ public class FixLyreScene extends Scene {
   }
 
   void mousePressedHandler() {
-    println("mouse handler lyre scene " + mouseX + " " + mouseY);
     for (LyreWire w : wires) {
       if (dist(w.getXInitial(), w.getYInitial(), mouseX, mouseY) < 10) {
         w.setSelected(true);
