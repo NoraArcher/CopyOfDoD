@@ -57,14 +57,14 @@ public class FixLyreScene extends Scene {
 }
 
 private class LyreWire extends DraggableObject {
-  private int xInitial, yInitial;
+  private float xInitial, yInitial;
   private color c;
 
   // COORDINATES
-  final int[] STARTX = {399, 398, 393, 387};
-  final int[] STARTY = {311, 350, 438, 505};
-  final int[] ENDX = {567, 592, 584, 550};
-  final int[] ENDY = {314, 369, 453, 515};
+  final float[] STARTX = {399, 398, 393, 387};
+  final float[] STARTY = {311, 350, 438, 505};
+  final float[] ENDX = {567, 592, 584, 550};
+  final float[] ENDY = {314, 369, 453, 515};
 
   LyreWire(int start, int end, color c) {
     setCoords(STARTX[start], STARTY[start], ENDX[end], ENDY[end]);
@@ -73,11 +73,11 @@ private class LyreWire extends DraggableObject {
     this.yInitial = getY();
   }
 
-  int getXInitial() {
+  float getXInitial() {
     return xInitial;
   }
 
-  int getYInitial() {
+  float getYInitial() {
     return yInitial;
   }
 

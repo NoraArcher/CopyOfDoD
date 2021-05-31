@@ -14,19 +14,19 @@ public abstract class DraggableObject{
     settled = false;
   }
 
-  int getX() {
+  float getX() {
     return x;
   }
 
-  int getY() {
+  float getY() {
     return y;
   }
 
-  int getXFinal() {
+  float getXFinal() {
     return xFinal;
   }
 
-  int getYFinal() {
+  float getYFinal() {
     return yFinal;
   }
   
@@ -52,7 +52,7 @@ public abstract class DraggableObject{
     return settled;
   }
 
-  void setCoords(int x, int y, int xFinal, int yFinal) {
+  void setCoords(float x, float y, float xFinal, float yFinal) {
     this.x = x;
     this.y = y;
     this.xFinal = xFinal;
