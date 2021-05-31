@@ -18,6 +18,8 @@ public abstract class Scene {
   
   abstract void mouseHandler();
 
+  abstract void mousePressedHandler();
+
   abstract void mouseReleasedHandler();
   
   float getMapX(){

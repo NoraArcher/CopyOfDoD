@@ -48,8 +48,6 @@ public class FixLyreScene extends Scene {
   }
 
   void mouseHandler() {
-    println("mouse handler lyre scene " + mouseX + " " + mouseY);
-
     for (LyreWire w : wires) {
       if (w.selected()) {
         strokeWeight(4);
@@ -57,10 +55,19 @@ public class FixLyreScene extends Scene {
         line(w.getXInitial(), w.getYInitial(), mouseX, mouseY);
         noStroke();
         w.setCoords(mouseX, mouseY);
+
+        w.settle();
         break;
       }
+    }
+  }
 
-      if (dist(w.getXInitial(), w.getYInitial(), mouseX, mouseY) < 10) w.setSelected(true);
+  void mousePressedHandler() {
+    println("mouse handler lyre scene " + mouseX + " " + mouseY);
+    for (LyreWire w : wires) {
+      if (dist(w.getXInitial(), w.getYInitial(), mouseX, mouseY) < 10) {
+        w.setSelected(true);
+      }
     }
   }
 

@@ -81,6 +81,10 @@ public class AssembleArtifactScene extends Scene {
   void mouseReleasedHandler() {
     
   }
+
+  void mousePressedHandler() {
+    
+  }
   
   boolean allRight(){//true when every element of shards is settled, 
   //and their flipped values are the same

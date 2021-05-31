@@ -145,7 +145,8 @@ void mousePressed() {
       if (choices[0] >= -1) PC.setHat(choices[0]);// -1 is no hat, 1+ are hats
       if (choices[1] >= 0) PC.setColor(choices[1]);
     }
-    
+  } else {
+    activeSet.mousePressedHandler();
   }
 }
 
