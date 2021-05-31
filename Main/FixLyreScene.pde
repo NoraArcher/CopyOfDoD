@@ -61,8 +61,8 @@ private class LyreWire extends DraggableObject {
   private color c;
 
   // COORDINATES
-  final float[] STARTX = {399, 398, 393, 387};
-  final float[] STARTY = {311, 350, 438, 505};
+  final float[] STARTX = {399, 395, 393, 387};
+  final float[] STARTY = {311, 373, 438, 505};
   final float[] ENDX = {567, 592, 584, 550};
   final float[] ENDY = {314, 369, 453, 515};
 
