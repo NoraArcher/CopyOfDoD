@@ -86,6 +86,8 @@ private class LyreWire extends DraggableObject {
   }
 
   void display() {
-    
+    fill(getColor());
+    ellipse(getXInitial(), getYInitial(), 20, 20);
+    ellipse(getXFinal(), getYFinal(), 20, 20);
   }
 }
