@@ -12,7 +12,7 @@ public class FixLyreScene extends Scene {
   };
 
   FixLyreScene() {
-    super(200, 200, "Fix Lyre");
+    super(200, 450, "Fix Lyre");
     emptyLyre = loadImage("emptyLyre.png");
     wires = new LyreWire[4];
 
