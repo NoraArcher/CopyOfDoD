@@ -24,13 +24,9 @@ public class FixLyreScene extends Scene {
     for (int i = 0; i < wires.length; i++) {
       wires[i] = new LyreWire(starts.get(i), ends.get(i), COLORS[i]);
     }
-
-    println("Constructor");
   }
 
   void display() {
-    println("display lyre scene");
-
     // Background and border
     background(75, 175, 184); // darker cyan-ish
     stroke(255, 215, 0); strokeWeight(8); // gold
@@ -53,12 +49,24 @@ public class FixLyreScene extends Scene {
 
   void mouseHandler() {
     println("mouse handler lyre scene " + mouseX + " " + mouseY);
+
+    for (LyreWire w : wires) {
+      if (w.selected()) {
+        stroke(4);
+        line(w.getXInitial(), w.getYInitial(), mouseX, mouseY);
+        w.setCoords(mouseX, mouseY);
+        break;
+      }
+
+      if (dist(w.getX(), w.getY(), mouseX, mouseY) < 10) w.setSelected(true);
+    }
   }
 }
 
 private class LyreWire extends DraggableObject {
   private float xInitial, yInitial;
   private color c;
+  private boolean isSelected;
 
   // COORDINATES
   final float[] STARTX = {399, 395, 393, 387};
@@ -71,6 +79,7 @@ private class LyreWire extends DraggableObject {
     this.c = c;
     this.xInitial = getX();
     this.yInitial = getY();
+    this.isSelected = false;
   }
 
   float getXInitial() {
@@ -83,6 +92,14 @@ private class LyreWire extends DraggableObject {
 
   color getColor() {
     return c;
+  }
+
+  boolean selected() {
+    return isSelected;
+  }
+
+  void setSelected(boolean selected) {
+    isSelected = selected;
   }
 
   void display() {

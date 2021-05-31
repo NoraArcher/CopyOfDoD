@@ -58,4 +58,9 @@ public abstract class DraggableObject{
     this.xFinal = xFinal;
     this.yFinal = yFinal;
   }
+
+  void setCoords(float x, float y) {
+    this.x = x;
+    this.y = y;
+  }
 }
