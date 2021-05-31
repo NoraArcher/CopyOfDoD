@@ -2,6 +2,7 @@ import java.util.*;
 public class FixLyreScene extends Scene {
   private PImage emptyLyre;
   private LyreWire[] wires;
+  private int endCount;
 
   // COLORS
   final color[] COLORS = {
@@ -28,7 +29,8 @@ public class FixLyreScene extends Scene {
 
   void display() {
     // Background and border
-    background(75, 175, 184); // darker cyan-ish
+    if (isCompleted()) background(75, 175, 184); // darker cyan-ish
+    else background(235, 113, 52); // orangey-red
     stroke(255, 215, 0); strokeWeight(8); // gold
     fill(160, 186, 147); // pale green-ish
     rect(75, 125, width-150, height-250, 10);
@@ -40,6 +42,14 @@ public class FixLyreScene extends Scene {
     // Wires
     for (LyreWire w : wires) {
       w.display();
+    }
+
+    if (isCompleted()) {
+      endCount++;
+    }
+
+    if (endCount >= 170) {
+      super.finished = true;
     }
   }
 
