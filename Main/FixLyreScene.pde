@@ -58,12 +58,14 @@ public class FixLyreScene extends Scene {
         break;
       }
 
-      if (dist(w.getX(), w.getY(), mouseX, mouseY) < 10) w.setSelected(true);
+      if (dist(w.getXInitial(), w.getYInitial(), mouseX, mouseY) < 10) w.setSelected(true);
     }
   }
 
   void mouseReleasedHandler() {
-    
+    for (LyreWire w : wires) {
+      w.setSelected(false);
+    }
   }
 }
 
