@@ -26,7 +26,7 @@ https://docs.google.com/document/d/1dTjjHdyoeeg2Mowm0JAl9EsL_Tx5iFQnXfJ07gILaE8/
 | Wed 5/26/21 | Created DigButton and MapButton, changed display of MainMapScene | Connected clock to system time, tried some early refactoring |
 | Sat 5/29/21 | Minimum functioning ArtifactAssembleScene completed, made Buttons more reactive, and updated UML |  |
 | Sun 5/30/21 | Changed Player display and customizability with Style Button, while improving the flipping, unsettling, and deselecting in AssembleArtifactScene  | Refactored Main code, restructured Button class hierarchy, created FixLyreScene, added more input handlers for Scenes |
-| Mon 5/31/21 | Defeat and Victory Scenes were created | Updated UML |
+| Mon 5/31/21 | Defeat and Victory Scenes were created and and functioning | Updated UML |
 
 ## UML Diagrams
 ![UML Diagram](/img/APCS%20Final%20Project.png)
