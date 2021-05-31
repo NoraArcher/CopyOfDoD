@@ -121,5 +121,20 @@ private class LyreWire extends DraggableObject {
     fill(getColor());
     ellipse(getXInitial(), getYInitial(), 20, 20);
     ellipse(getXFinal(), getYFinal(), 20, 20);
+
+    if (isSettled()) {
+      strokeWeight(4);
+      stroke(getColor());
+      line(getXInitial(), getYInitial(), getXFinal(), getYFinal());
+      noStroke();
+    }
+  }
+
+  void settle() {
+    if (dist(getX(), getY(), getXFinal(), getYFinal()) < 10) {
+      setSelected(false);
+      setCoords(getXFinal(), getYFinal());
+      setSettled(true);
+    }
   }
 }

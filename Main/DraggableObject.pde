@@ -52,6 +52,10 @@ public abstract class DraggableObject{
     return settled;
   }
 
+  void setSettled(boolean settled) {
+    this.settled = settled;
+  }
+
   void setCoords(float x, float y, float xFinal, float yFinal) {
     this.x = x;
     this.y = y;
