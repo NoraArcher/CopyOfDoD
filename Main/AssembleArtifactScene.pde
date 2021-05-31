@@ -10,10 +10,7 @@ public class AssembleArtifactScene extends Scene {
   //private String name;
   
   AssembleArtifactScene(){
-    super.mapX = 600;
-    super.mapY = 165;
-    super.finished = false;
-    super.name = "Assemble Artifact";
+    super(600, 165, "Assemble Artifact");
     shards = new UrnShard[5];
     int destX = (width/2)-(384/2);  int destY = (height/2)-(512/2);
     int lCol = (75+135); int rCol = width-(75+135);//these are vis values
@@ -91,6 +88,14 @@ public class AssembleArtifactScene extends Scene {
     if (endCount == 0 && allRight()) {
       endCount=1;
     }
+  }
+
+  void mouseReleasedHandler() {
+    
+  }
+
+  void mousePressedHandler() {
+    
   }
   
   boolean allRight(){//true when every element of shards is settled, 
