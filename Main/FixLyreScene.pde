@@ -1,6 +1,7 @@
 import java.util.*;
 public class FixLyreScene extends Scene {
   private PImage emptyLyre;
+  private PImage fixedLyre;
   private LyreWire[] wires;
   private int endCount;
 
@@ -15,6 +16,7 @@ public class FixLyreScene extends Scene {
   FixLyreScene() {
     super(515, 400, "Fix Lyre");
     emptyLyre = loadImage("emptyLyre.png");
+    fixedLyre = loadImage("fixedLyre.png");
     wires = new LyreWire[4];
 
     List<Integer> starts = Arrays.asList(new Integer[] {0, 1, 2, 3});
@@ -31,22 +33,23 @@ public class FixLyreScene extends Scene {
     // Background and border
     if (isCompleted()) background(75, 175, 184); // darker cyan-ish
     else background(235, 113, 52); // orangey-red
+    
     stroke(255, 215, 0); strokeWeight(8); // gold
     fill(160, 186, 147); // pale green-ish
     rect(75, 125, width-150, height-250, 10);
     noStroke();
 
-    // Empty lyre
-    image(emptyLyre, width/2 - emptyLyre.width/2, height/2 - emptyLyre.height/2);
-
-    // Wires
-    for (LyreWire w : wires) {
-      w.display();
-    }
-
+    // Lyre and wires
     if (isCompleted()) {
-      endCount++;
+      image(fixedLyre, width/2 - emptyLyre.width/2, height/2 - emptyLyre.height/2);
+    } else {
+      image(emptyLyre, width/2 - emptyLyre.width/2, height/2 - emptyLyre.height/2);
+      for (LyreWire w : wires) {
+        w.display();
+      }
     }
+
+    if (isCompleted()) endCount++;
 
     if (endCount >= 170) {
       super.finished = true;
