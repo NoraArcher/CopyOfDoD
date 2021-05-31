@@ -43,7 +43,10 @@ public class AssembleArtifactScene extends Scene {
     if (endCount == 0){
       fill(84,105,120);//dark blue
       textSize(30);
+      text("Click D to deselect a piece", 310, 95);
       text("Click F to flip a piece", 350, height-75);
+      textSize(23);  fill(84,105,120,180);
+      text("Hint: flipping can also separate a clump of pieces", 250, height-45);
     } else if (endCount > 0) {
       if (endCount > 80){
         fill(0,137,137);
@@ -182,6 +185,16 @@ private class UrnShard extends DraggableObject {
   
   void unsettleShard(float ent){
     super.unsettle(ent);
+    if (super.x+shiftX < visX) {
+      super.x-=90;
+    } else if (super.x+shiftX > visX){
+      super.x+=90;
+    }
+    if (super.y+shiftY < visY) {
+      super.y+=60;
+    } else if (super.y+shiftY > visY){
+      super.y-=60;
+    }
     visX = super.x+shiftX;
     visY = super.y+shiftY;
   }
