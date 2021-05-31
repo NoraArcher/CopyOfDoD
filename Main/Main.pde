@@ -1,6 +1,7 @@
 // TIME
 float startTime;
 final float ALLOTTED_TIME = 300000; // 5 mins
+//final float ALLOTTED_TIME = 10000; // 5 mins
 
 // SCENE HANDLING
 ArrayList<Scene> scenes;
@@ -34,7 +35,7 @@ void setupScenes() {
   scenes.add(new AssembleArtifactScene());
   scenes.add(new FixLyreScene());
   //next task
-  //scenes.add(new DefeatScene());
+  scenes.add(new DefeatScene());
   //scenes.add(new VictoryScene());
 
   activeSet = scenes.get(0);
@@ -49,30 +50,30 @@ void setupButtons() {
 
 /** Loops continuously - displays clock, current scene, and buttons */
 void draw() {
-  activeSet.display();
-
+  //activeSet.display();
   if (allFinished()) {
-    // activeSet = VictoryScene; // ^ same with VictoryScene
-  } else if (getRemainingTime() < 0) {
-    // activeSet = DefeatScene; // DefeatScene's finished value is always false
+    // activeSet = scenes.get(scenes.size()-1); //VictoryScene's finished always = false
+    // activeSet.display(PC);
+  } else if (getRemainingTime() <= 0) {
+    activeSet = scenes.get(3); //^ ditto, index is scenes.size()-2;
+    activeSet.display(PC);
   } else {
+    activeSet.display();
     showClock();
+    if (!tasking) {
+      if (DIG.clicked(scenes, PC) > 0) {};//this will check and change active all at once
+      STYLE.activate(PC);//(similar use to above)
+      DIG.display();
+      MAP.display(scenes);
+      STYLE.display();
+      PC.display();
+    }
+    if (activeSet.isFinished()) {
+      tasking = false;
+      activeSet = scenes.get(0);
+    }
+    activeSet.mouseHandler();
   }
-
-  if (!tasking) {
-    if (DIG.clicked(scenes, PC) > 0) {};//this will check and change active all at once
-    STYLE.activate(PC);//(similar use to above)
-    DIG.display();
-    //MAP.display();
-    MAP.display(scenes);
-    STYLE.display();
-    PC.display();
-  }
-  if (activeSet.isFinished()) {
-    tasking = false;
-    activeSet = scenes.get(0);
-  }
-  activeSet.mouseHandler();
 }
 
 // TIME
@@ -158,7 +159,7 @@ void mouseReleased() {
 // VICTORY
 
 boolean allFinished() {
-  for (int i = 0; i < scenes.size(); i++) {
+  for (int i = 1; i < scenes.size()-1; i++) {
     //change initial i to 1 when you're ready to add victory
     //once Defeat and VictoryScenes are added make it scenes.size()-2
     if (!scenes.get(i).isFinished()) return false;
@@ -193,7 +194,7 @@ private class DigButton extends Button {
     Scene c;
     int answer = -1;
     setActive(false);
-    for (int i = 1; i < sets.size(); i++){// Change to size()-2 when Defeat+Victory are added
+    for (int i = 1; i < sets.size()-1; i++){// Change to size()-2 when Defeat+Victory are added
       c = sets.get(i);
       if (!c.isFinished() && dist(c.getMapX(),c.getMapY(),p.getX(),p.getY()) < (p.getRadius()*7/5.0)){
         answer = i;
@@ -218,7 +219,7 @@ private class MapButton extends Button {
       opacity = 200;
       //display tasks labels
       textSize(28);
-      for (int i = 1; i < sets.size(); i++) {// Change to size()-2 when Defeat+Victry are added
+      for (int i = 1; i < sets.size()-1; i++) {// Change to size()-2 when Defeat+Victry are added
         Scene c = sets.get(i);
         fill(0);
         if (c.isFinished()) fill(34, 139, 34);

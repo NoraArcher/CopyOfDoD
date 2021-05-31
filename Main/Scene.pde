@@ -14,6 +14,10 @@ public abstract class Scene {
   
   abstract void display();//to be called in draw
   
+  void display(Player p){
+    p.display();//here so Victory and Defeat can override it
+  }
+  
   abstract void keyHandler(int code);
   
   abstract void mouseHandler();
