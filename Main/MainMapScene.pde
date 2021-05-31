@@ -23,7 +23,7 @@ public class MainMapScene extends Scene{
     rect(width/4, 125, 120, 90);//licensing check in
     rect((75+width/5), height-250, 400, 70);//path to item storage
     fill(palette[3]);
-    rect(75, height-375, width/5, 250);//item storage
+    rect(75, height-375, width/5, 250, 10);//item storage
     fill(palette[0]);
     
     //noFill();
