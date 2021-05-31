@@ -27,4 +27,20 @@ public abstract class DraggableObject{
     return settled;
   }
   
+  void unsettle(float entropy){
+    if (settled){
+      settled = false;
+      if (x > width/2) {
+        x-=(entropy*40);
+      } else {
+        x+=(entropy*40);
+      }
+      if (y > height/2) {
+        y-=(entropy*40);
+      } else {
+        y+=(entropy*40);
+      } 
+    }
+  }
+  
 }
