@@ -32,6 +32,7 @@ void setupScenes() {
   // ALL SCENES ADDED HERE
   scenes.add(new MainMapScene());
   scenes.add(new AssembleArtifactScene());
+  scenes.add(new FixLyreScene());
   //next task
   //scenes.add(new DefeatScene());
   //scenes.add(new VictoryScene());
@@ -144,8 +145,14 @@ void mousePressed() {
       if (choices[0] >= -1) PC.setHat(choices[0]);// -1 is no hat, 1+ are hats
       if (choices[1] >= 0) PC.setColor(choices[1]);
     }
-    
+  } else {
+    activeSet.mousePressedHandler();
   }
+}
+
+/** Handles mouse releases in current set */
+void mouseReleased() {
+  activeSet.mouseReleasedHandler();
 }
 
 // VICTORY
