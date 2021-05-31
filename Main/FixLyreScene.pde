@@ -52,8 +52,10 @@ public class FixLyreScene extends Scene {
 
     for (LyreWire w : wires) {
       if (w.selected()) {
-        stroke(4);
+        strokeWeight(4);
+        stroke(w.getColor());
         line(w.getXInitial(), w.getYInitial(), mouseX, mouseY);
+        noStroke();
         w.setCoords(mouseX, mouseY);
         break;
       }
