@@ -1,7 +1,8 @@
+import java.util.Objects;
 public class AssembleArtifactScene extends Scene {
   
   private UrnShard[] shards;
-  private UrnShard lastSelected;
+  private UrnShard lastSelected, lastDeselected;
   private PImage fullUrn;
   private int endCount;
   //private float super.mapX, super.mapY; (from Scene)
@@ -19,6 +20,7 @@ public class AssembleArtifactScene extends Scene {
     shards[3] = new UrnShard(255, 300, lCol-255, 300-300, destX,destY,"shard3.png");
     shards[4] = new UrnShard(175, 405, lCol-175, 500-405, destX,destY,"shard4.png");
     lastSelected = shards[0];
+    lastDeselected = null;
     fullUrn = loadImage("shardsAll.png");
     endCount=0;
   }
@@ -60,15 +62,22 @@ public class AssembleArtifactScene extends Scene {
   void keyHandler(int code){
     if (code == 70){//F
       lastSelected.flip();
+    } else if (code == 68){//D
+      lastSelected.setDeselected(true);
+      lastDeselected = lastSelected;
     }
   }
   
   void mouseHandler(){
     for (UrnShard s : shards){
       if (!s.isSettled()) {
-        if (s.move()) {
+        if (!s.isDeselected() && s.move()) {
           lastSelected = s;
           s.settle();//to see if it found its destination
+        }
+        if (!Objects.isNull(lastDeselected) && lastSelected != lastDeselected){
+          lastDeselected.setDeselected(false);
+          lastDeselected = null;
         }
       }
       //^for loop content
@@ -95,7 +104,11 @@ public class AssembleArtifactScene extends Scene {
       if (!s.isSettled() || s.isFlipped()!=consistentF) ans=false;
       if (!s.isSettled()) allSettled=false;
     }
-    if (!ans && allSettled){}//restart button?
+    if (!ans && allSettled){
+      for (UrnShard s : shards){
+        s.unsettleShard(2.5);
+      }
+    }//restart button?
     return ans;
   }
   
@@ -106,7 +119,7 @@ private class UrnShard extends DraggableObject {
   //private float super.x, super.y, super.xFinal, super.yFinal; (from Draggable)
   private float visX, visY, shiftX, shiftY;
   private PImage fragment;
-  private boolean flipped;
+  private boolean flipped, deselected;
   
   UrnShard(int sX, int sY, int x1, int y1, int x2, int y2, String png){
     shiftX = sX;        shiftY = sY;
@@ -114,7 +127,7 @@ private class UrnShard extends DraggableObject {
     visX = x1+shiftX;   visY = y1+shiftY;
     super.xFinal = x2;  super.yFinal = y2;
     super.settled = false;
-    flipped = false;
+    flipped = false;  deselected = false;
     fragment = loadImage(png);
   }
   
@@ -166,4 +179,19 @@ private class UrnShard extends DraggableObject {
   boolean isFlipped(){
     return flipped;
   }
+  
+  void unsettleShard(float ent){
+    super.unsettle(ent);
+    visX = super.x+shiftX;
+    visY = super.y+shiftY;
+  }
+  
+  boolean isDeselected(){
+    return deselected;
+  }
+  
+  void setDeselected(boolean a){
+    deselected = a;
+  }
+  
 }

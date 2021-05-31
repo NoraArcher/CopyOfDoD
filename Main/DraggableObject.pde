@@ -67,4 +67,21 @@ public abstract class DraggableObject{
     this.x = x;
     this.y = y;
   }
+  
+  void unsettle(float entropy){
+    if (settled){
+      settled = false;
+      if (x > width/2) {
+        x-=(entropy*40);
+      } else {
+        x+=(entropy*40);
+      }
+      if (y > height/2) {
+        y-=(entropy*40);
+      } else {
+        y+=(entropy*40);
+      } 
+    }
+  }
+  
 }
