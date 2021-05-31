@@ -43,6 +43,15 @@ public class FixLyreScene extends Scene {
     }
   }
 
+  boolean isCompleted() {
+    for (LyreWire w : wires) {
+      if (!w.isSettled()) return false;
+    }
+    return true;
+  }
+
+  // HANDLERS
+
   void keyHandler(int code) {
     println("key handler lyre scene " + code);
   }
