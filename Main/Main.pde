@@ -261,9 +261,11 @@ private class StyleButton extends Button {
       strokeWeight(3);
     }
     rect(getX()-10, getY()-25, 30, 50);
-    fill(218, 194, 124);  noStroke();
+    fill(218, 194, 124);
     rectMode(CENTER);
     rect(getX()+20, getY(), 35, 28, 10);
+    noStroke();
+    rect(getX()+30, getY(), 20, 35, 10);
     rectMode(CORNER);
   }
   
