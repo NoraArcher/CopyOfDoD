@@ -61,6 +61,10 @@ public class FixLyreScene extends Scene {
       if (dist(w.getX(), w.getY(), mouseX, mouseY) < 10) w.setSelected(true);
     }
   }
+
+  void mouseReleasedHandler() {
+    
+  }
 }
 
 private class LyreWire extends DraggableObject {

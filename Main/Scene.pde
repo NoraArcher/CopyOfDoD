@@ -17,6 +17,8 @@ public abstract class Scene {
   abstract void keyHandler(int code);
   
   abstract void mouseHandler();
+
+  abstract void mouseReleasedHandler();
   
   float getMapX(){
     return mapX;

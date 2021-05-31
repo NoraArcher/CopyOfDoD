@@ -77,6 +77,10 @@ public class AssembleArtifactScene extends Scene {
       endCount=1;
     }
   }
+
+  void mouseReleasedHandler() {
+    
+  }
   
   boolean allRight(){//true when every element of shards is settled, 
   //and their flipped values are the same
@@ -158,5 +162,4 @@ private class UrnShard extends DraggableObject {
   boolean isFlipped(){
     return flipped;
   }
-  
 }

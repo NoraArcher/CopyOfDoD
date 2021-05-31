@@ -149,6 +149,11 @@ void mousePressed() {
   }
 }
 
+/** Handles mouse releases in current set */
+void mouseReleased() {
+  activeSet.mouseReleasedHandler();
+}
+
 // VICTORY
 
 boolean allFinished() {
