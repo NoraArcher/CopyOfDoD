@@ -52,10 +52,10 @@ void setupButtons() {
 void draw() {
   //activeSet.display();
   if (allFinished()) {
-    activeSet = scenes.get(scenes.size()-1); //VictoryScene's finished always = false
+    activeSet = scenes.get(scenes.size()-1);//VictoryScene's finished always = false
     activeSet.display(PC);
   } else if (getRemainingTime() <= 0) {
-    activeSet = scenes.get(scenes.size()-2); //^ ditto, index is scenes.size()-2;
+    activeSet = scenes.get(scenes.size()-2);//^ ditto
     activeSet.display(PC);
   } else {
     activeSet.display();
@@ -159,8 +159,6 @@ void mouseReleased() {
 
 boolean allFinished() {
   for (int i = 1; i < scenes.size()-2; i++) {
-    //change initial i to 1 when you're ready to add victory
-    //once Defeat and VictoryScenes are added make it scenes.size()-2
     if (!scenes.get(i).isFinished()) return false;
   }
   return true;
@@ -193,7 +191,7 @@ private class DigButton extends Button {
     Scene c;
     int answer = -1;
     setActive(false);
-    for (int i = 1; i < sets.size()-2; i++){// Change to size()-2 when Defeat+Victory are added
+    for (int i = 1; i < sets.size()-2; i++){
       c = sets.get(i);
       if (!c.isFinished() && dist(c.getMapX(),c.getMapY(),p.getX(),p.getY()) < (p.getRadius()*7/5.0)){
         answer = i;
@@ -218,7 +216,7 @@ private class MapButton extends Button {
       opacity = 200;
       //display tasks labels
       textSize(28);
-      for (int i = 1; i < sets.size()-2; i++) {// Change to size()-2 when Defeat+Victry are added
+      for (int i = 1; i < sets.size()-2; i++) {
         Scene c = sets.get(i);
         fill(0);
         if (c.isFinished()) fill(34, 139, 34);

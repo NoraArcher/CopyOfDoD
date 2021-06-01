@@ -14,10 +14,10 @@ public class AssembleArtifactScene extends Scene {
     shards = new UrnShard[5];
     int destX = (width/2)-(384/2);  int destY = (height/2)-(512/2);
     int lCol = (75+135); int rCol = width-(75+135);//these are vis values
-    shards[0] = new UrnShard(150, 100, rCol- 80, 380-100, destX,destY,"shard0.png");//shifted this to fit the screen better
+    shards[0] = new UrnShard(150, 100, rCol-150, 380-100, destX,destY,"shard0.png");  shards[0].flip();//shifted this to fit the screen better
     shards[1] = new UrnShard(245, 150, rCol-245, 555-150, destX,destY,"shard1.png");
     shards[2] = new UrnShard( 96, 220, rCol- 96, 205-220, destX,destY,"shard2.png");
-    shards[3] = new UrnShard(255, 300, lCol-255, 300-300, destX,destY,"shard3.png");
+    shards[3] = new UrnShard(255, 300, lCol-155, 300-300, destX,destY,"shard3.png");  shards[3].flip();
     shards[4] = new UrnShard(175, 405, lCol-175, 500-405, destX,destY,"shard4.png");
     lastSelected = shards[0];
     lastDeselected = null;
