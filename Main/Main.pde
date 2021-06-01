@@ -57,6 +57,9 @@ void draw() {
   } else if (getRemainingTime() <= 0) {
     activeSet = scenes.get(scenes.size()-2);//^ ditto
     activeSet.display(PC);
+  //} else if (getRemainingTime() >= 300000) {//initial allotted time can go up or can startTime be increased, or getRemainingTime() method can change
+  //  activeSet = //opening title / instructions / intro scene, maybe mainly text like star wars
+  //  activeSet.display();
   } else {
     activeSet.display();
     showClock();
